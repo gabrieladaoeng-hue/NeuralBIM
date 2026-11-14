@@ -1,0 +1,21 @@
+﻿ID;Categoria;Tipo;Unidade;Qtd referencia;Qtd NeuralBIM;Erro %;Custo referencia (R$);Custo NeuralBIM (R$)
+328128;Parede;Parede Externa - Bloco Cerâmico 14cm;m2;16,992;17,51;3,048;3162,04;3258,44
+328129;Parede;Parede Externa - Bloco Cerâmico 14cm;m2;20,622;20,62;-0,01;3837,55;3837,18
+328130;Parede;Parede Externa - Bloco Cerâmico 14cm;m2;18,642;18,64;-0,011;3469,09;3468,72
+328131;Parede;Parede Externa - Bloco Cerâmico 14cm;m2;20,862;20,34;-2,502;3882,21;3785,07
+328132;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;18,942;18,42;-2,756;4302,49;4183,92
+328133;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;9,121;9,03;-0,998;2071,74;2051,07
+328134;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;8,421;7,99;-5,118;1912,75;1814,85
+328135;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;8,701;8,27;-4,953;1976,35;1878,45
+328136;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;7,021;6,59;-6,139;1594,75;1496,85
+328137;Parede;Parede Interna - Bloco Cerâmico 9cm;m2;3,29;2,95;-10,334;747,29;670,06
+328140;Laje;Piso sobre solo 10cm;m2;65,2;65,2;0,0;9811,95;9811,95
+328147;Laje;Laje trelicada cobertura h12;m2;65,2;65,2;0,0;13529,65;13529,65
+328168;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328169;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328170;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328171;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328172;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328173;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328174;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36
+328175;Pilar;M_Concreto-Quadrado-Coluna : 190 x 190 mm;m3;0,10108;0,101;-0,079;810,05;810,36

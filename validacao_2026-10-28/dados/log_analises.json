@@ -1,0 +1,197 @@
+[
+  {
+    "timestamp": "2026-09-12T02:48:49.935343",
+    "chamadas_ia": 3,
+    "id": "5d650305-1eb0-4c2f-9721-785de3c32839"
+  },
+  {
+    "timestamp": "2026-09-12T03:03:10.775302",
+    "chamadas_ia": 2,
+    "id": "a661bde2-d15e-4f78-93a6-c03b67280841"
+  },
+  {
+    "timestamp": "2026-09-12T03:21:13.920924",
+    "chamadas_ia": 3,
+    "id": "9c8897bd-2e8d-492c-a28e-17289c7cca1c"
+  },
+  {
+    "timestamp": "2026-09-12T03:22:47.090179",
+    "chamadas_ia": 4,
+    "id": "0af95157-3bc7-4c12-9d64-70be7387cf01"
+  },
+  {
+    "timestamp": "2026-09-12T03:25:20.077481",
+    "chamadas_ia": 4,
+    "id": "bf6da855-6726-44bb-b715-094278f5dc9d"
+  },
+  {
+    "timestamp": "2026-09-12T14:04:28.461748",
+    "chamadas_ia": 3,
+    "id": "c94bcefb-0f49-46d5-a812-ff36ece31b5e"
+  },
+  {
+    "timestamp": "2026-09-12T15:49:43.691389",
+    "chamadas_ia": 3,
+    "id": "5490ff6c-8dce-4d83-907a-ae818aa473d1"
+  },
+  {
+    "timestamp": "2026-09-13T22:02:33.251780",
+    "chamadas_ia": 4,
+    "id": "2affe1f0-be3a-4af4-b875-ae8c315db6e2"
+  },
+  {
+    "timestamp": "2026-09-13T22:03:11.083414",
+    "chamadas_ia": 4,
+    "id": "c4657cd7-06e2-4970-a2aa-efa6065b2fad"
+  },
+  {
+    "timestamp": "2026-09-13T22:45:01.216555",
+    "chamadas_ia": 4,
+    "id": "c46b2e40-1f59-49b8-a0a9-5de96f751349"
+  },
+  {
+    "timestamp": "2026-09-13T22:47:14.525755",
+    "chamadas_ia": 4,
+    "id": "18a9886d-95d7-4641-ac4a-88b1193d45e3"
+  },
+  {
+    "timestamp": "2026-09-13T22:54:48.824690",
+    "chamadas_ia": 4,
+    "id": "860a638f-f104-40cb-ada6-2e490641fd7b"
+  },
+  {
+    "timestamp": "2026-09-13T23:42:40.670295",
+    "chamadas_ia": 3,
+    "id": "273e2e9e-e76b-42f2-9c67-6eb55ae1cd44"
+  },
+  {
+    "timestamp": "2026-09-13T23:43:52.548970",
+    "chamadas_ia": 3,
+    "id": "eb8e5e64-e58b-47d5-b20a-46e44745504f"
+  },
+  {
+    "timestamp": "2026-09-13T23:46:23.882915",
+    "chamadas_ia": 3,
+    "id": "32c38a3a-fe5f-4ba2-bbf2-112c00cb22e2"
+  },
+  {
+    "timestamp": "2026-09-14T19:01:37.187431",
+    "chamadas_ia": 3,
+    "id": "8b464167-69b8-4ab9-afd4-e2b5a97c30bf"
+  },
+  {
+    "timestamp": "2026-09-14T23:12:05.307769",
+    "chamadas_ia": 3,
+    "id": "435929b4-9354-4dde-9fcc-340b8fe8d02d"
+  },
+  {
+    "timestamp": "2026-09-14T23:59:21.653173",
+    "chamadas_ia": 3,
+    "id": "f6816a54-80c3-441a-9173-4364b97ead69"
+  },
+  {
+    "timestamp": "2026-09-15T00:00:56.314360",
+    "chamadas_ia": 3,
+    "id": "ba1a43c0-5ad4-4cfc-9cd3-b9f262530f3c"
+  },
+  {
+    "timestamp": "2026-09-15T18:21:36.369860",
+    "chamadas_ia": 3,
+    "id": "617ef1bf-13c9-4178-af81-7e6047964edf"
+  },
+  {
+    "timestamp": "2026-09-16T18:41:00.041720",
+    "chamadas_ia": 3,
+    "id": "badfec68-ba93-4e28-ad2d-b679e2b264bf"
+  },
+  {
+    "timestamp": "2026-09-16T18:52:37.748554",
+    "chamadas_ia": 3,
+    "id": "6fc2652f-d869-4740-8fb9-ec0e6d521009"
+  },
+  {
+    "timestamp": "2026-09-17T19:53:48.521245",
+    "chamadas_ia": 3,
+    "id": "04a0005b-50b5-457a-91ff-77945a3d32ce"
+  },
+  {
+    "timestamp": "2026-09-17T19:59:59.634862",
+    "chamadas_ia": 3,
+    "id": "9469d13f-2a2f-40dd-8560-fcdc0b0699db"
+  },
+  {
+    "timestamp": "2026-09-17T20:02:55.384132",
+    "chamadas_ia": 3,
+    "id": "8130e0ad-61d9-413f-a28f-559fc4df5246"
+  },
+  {
+    "timestamp": "2026-09-17T20:26:54.809745",
+    "chamadas_ia": 3,
+    "id": "328c216c-ec88-4f6c-8c18-b5b542a6b95f"
+  },
+  {
+    "timestamp": "2026-10-26T10:47:04.712319",
+    "chamadas_ia": 3,
+    "id": "771b22d2-d4eb-4978-b96b-5189077cc409"
+  },
+  {
+    "timestamp": "2026-10-26T13:47:15.449893",
+    "chamadas_ia": 3,
+    "id": "2b573032-afd7-4735-994a-d89da3147fc9"
+  },
+  {
+    "timestamp": "2026-10-26T13:47:40.180120",
+    "chamadas_ia": 3,
+    "id": "8b6d83ac-73a8-4a13-bb20-2968d7e560e8"
+  },
+  {
+    "timestamp": "2026-10-26T13:48:06.338402",
+    "chamadas_ia": 3,
+    "id": "68692e4d-c2a1-4b8b-8db3-e5e7cba103d1"
+  },
+  {
+    "timestamp": "2026-10-26T20:17:46.199453",
+    "chamadas_ia": 5,
+    "id": "85de8a40-a9d4-4928-a8a1-5863d01e0881"
+  },
+  {
+    "timestamp": "2026-10-26T20:19:02.779671",
+    "chamadas_ia": 5,
+    "id": "8b1d2b40-41cf-499a-8819-3a0d7b814d26"
+  },
+  {
+    "timestamp": "2026-10-26T20:43:01.664129",
+    "chamadas_ia": 5,
+    "id": "526b8048-f1f0-47d0-b54b-e451586f4a3a"
+  },
+  {
+    "timestamp": "2026-10-28T20:39:25.615412",
+    "chamadas_ia": 2,
+    "id": "8cf25617-927d-44f0-8112-24222707c731"
+  },
+  {
+    "timestamp": "2026-10-28T20:40:56.438693",
+    "chamadas_ia": 5,
+    "id": "b541bee2-0493-4dfa-9811-5574d035b3c5"
+  },
+  {
+    "timestamp": "2026-10-28T20:41:23.790996",
+    "chamadas_ia": 5,
+    "id": "5a76db52-8a29-4ea2-ad1f-4451d1959a82"
+  },
+  {
+    "timestamp": "2026-10-28T20:41:50.719971",
+    "chamadas_ia": 5,
+    "id": "c824d94a-67d4-4d83-9866-ca7a58817705"
+  },
+  {
+    "timestamp": "2026-10-28T20:42:18.566368",
+    "chamadas_ia": 5,
+    "id": "460884fa-8989-439b-8f3a-1c59123f9664"
+  },
+  {
+    "timestamp": "2026-10-28T20:42:47.489173",
+    "chamadas_ia": 5,
+    "id": "255f096a-4996-42bf-a014-029bc893dd40"
+  }
+]

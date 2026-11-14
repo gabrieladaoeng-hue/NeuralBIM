@@ -1,0 +1,195 @@
+[
+  {
+    "codigo_sinapi": "103351",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 9X9X19 CM (ESPESSURA 9 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 227.14,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103344",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA VERTICAL DE 11,5X19X29 CM (ESPESSURA 11,5 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO EM BETONEIRA. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 98.65,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103335",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 14X9X19 CM (ESPESSURA 14 CM, BLOCO DEITADO) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 186.09,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103362",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 19X19X29 CM (ESPESSURA 19 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO EM BETONEIRA. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 120.36,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "89306",
+    "descricao": "ALVENARIA ESTRUTURAL DE BLOCOS CERÂMICOS 14X19X29 CM (ESPESSURA 14 CM), FBK = 6 MPA, UTILIZANDO COLHER DE PEDREIRO. AF_07/2026",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 114.52,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103336",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS VAZADOS DE CONCRETO APARENTE DE 9X19X39 CM (ESPESSURA 9 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO EM BETONEIRA. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 99.79,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103319",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS VAZADOS DE CONCRETO DE 14X19X39 CM (ESPESSURA 14 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 115.28,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103340",
+    "descricao": "ALVENARIA DE VEDAÇÃO DE BLOCOS VAZADOS DE CONCRETO APARENTE DE 19X19X39 CM (ESPESSURA 19 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO EM BETONEIRA. AF_12/2021",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 157.94,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "89462",
+    "descricao": "ALVENARIA DE BLOCOS DE CONCRETO ESTRUTURAL 14X19X29 CM (ESPESSURA 14 CM), FBK = 4,5 MPA, UTILIZANDO PALHETA. AF_07/2026",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 126.22,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "96358",
+    "descricao": "PAREDE COM SISTEMA EM CHAPAS DE GESSO PARA DRYWALL, USO INTERNO, COM DUAS FACES SIMPLES E ESTRUTURA METÁLICA COM GUIAS SIMPLES, SEM VÃOS. AF_07/2023_PS",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 109.26,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "101959",
+    "descricao": "LAJE PRÉ-MOLDADA UNIDIRECIONAL COM VÃOS MAIORES QUE 3,0 M, BIAPOIADA, PARA PISO, ENCHIMENTO EM EPS, VIGOTA PROTENDIDA, ALTURA TOTAL DA LAJE \"LT\" = 12 CM (ENCHIMENTO+CAPA) = (8+4). AF_08/2025",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 167.9,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103076",
+    "descricao": "EXECUÇÃO DE LAJE SOBRE SOLO, ESPESSURA DE 10 CM, FCK = 30 MPA, COM USO DE FORMAS EM MADEIRA SERRADA. AF_07/2026",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 150.49,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "106059",
+    "descricao": "LAJE PRÉ-MOLDADA UNIDIRECIONAL, BIAPOIADA, PARA FORRO, ENCHIMENTO EM CERÂMICA, VIGOTA TRELIÇADA, ALTURA TOTAL DA LAJE \"LT\" = 12 CM (ENCHIMENTO+CAPA) = (8+4). AF_08/2025",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 207.51,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92762",
+    "descricao": "ARMAÇÃO DE PILAR OU VIGA DE ESTRUTURA CONVENCIONAL DE CONCRETO ARMADO UTILIZANDO AÇO CA-50 DE 10,0 MM - MONTAGEM. AF_06/2022",
+    "unidade_sinapi": "KG",
+    "preco_unitario_rs": 11.77,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92770",
+    "descricao": "ARMAÇÃO DE LAJE DE ESTRUTURA CONVENCIONAL DE CONCRETO ARMADO UTILIZANDO AÇO CA-50 DE 8,0 MM - MONTAGEM. AF_06/2022",
+    "unidade_sinapi": "KG",
+    "preco_unitario_rs": 12.73,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92269",
+    "descricao": "FABRICAÇÃO DE FÔRMA PARA PILARES E ESTRUTURAS SIMILARES, EM MADEIRA SERRADA, E=25 MM. AF_09/2020",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 129.79,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92409",
+    "descricao": "MONTAGEM E DESMONTAGEM DE FÔRMA DE PILARES RETANGULARES E ESTRUTURAS SIMILARES, PÉ-DIREITO SIMPLES, EM MADEIRA SERRADA, 1 UTILIZAÇÃO. AF_09/2020",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 270.57,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92413",
+    "descricao": "MONTAGEM E DESMONTAGEM DE FÔRMA DE PILARES RETANGULARES E ESTRUTURAS SIMILARES, PÉ-DIREITO SIMPLES, EM MADEIRA SERRADA, 4 UTILIZAÇÕES. AF_09/2020",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 129.71,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103669",
+    "descricao": "CONCRETAGEM DE PILARES, FCK = 25 MPA, COM USO DE BALDES - LANÇAMENTO, ADENSAMENTO E ACABAMENTO. AF_02/2022",
+    "unidade_sinapi": "M3",
+    "preco_unitario_rs": 1020.68,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "92482",
+    "descricao": "MONTAGEM E DESMONTAGEM DE FÔRMA DE LAJE MACIÇA, PÉ-DIREITO SIMPLES, EM MADEIRA SERRADA, 1 UTILIZAÇÃO. AF_09/2020",
+    "unidade_sinapi": "M2",
+    "preco_unitario_rs": 485.73,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "103682",
+    "descricao": "CONCRETAGEM DE VIGAS E LAJES, FCK=25 MPA, PARA QUALQUER TIPO DE LAJE COM BALDES EM EDIFICAÇÃO TÉRREA - LANÇAMENTO, ADENSAMENTO E ACABAMENTO. AF_02/2022",
+    "unidade_sinapi": "M3",
+    "preco_unitario_rs": 1046.86,
+    "mes_referencia": "07/2026",
+    "regime": "não desonerado",
+    "fonte_aba": "CSD"
+  },
+  {
+    "codigo_sinapi": "104487",
+    "erro": "Não encontrado na aba CSD nem na aba ISD da planilha SINAPI_Referência_2026_07.xlsx (varredura completa: 10.544 linhas na CSD, 4.886 na ISD, checando fórmula HYPERLINK e valor numérico puro). Verificado no relatório SINAPI_Manutenções_2026_07.xlsx: o código aparece com histórico 'CRIAÇÃO DE COMPOSIÇÃO COM CUSTO' (referência 11/2022) e 'DESATIVAÇÃO' (referência 03/2024), seguido de duas entradas 'ALTERAÇÃO DE DESCRIÇÃO' posteriores à desativação (referências 05/2024 e 02/2025) cuja natureza exata (reativação vs. correção retroativa de histórico) não pôde ser determinada -- o relatório de manutenções não tem nenhum campo de código substituto (só Referência/Tipo/Código/Descrição/Manutenção). O código irmão da mesma família paramétrica (104484, mesma composição só que para edificação com dois pavimentos, citado na nota do mapeamento_sinapi.json) foi verificado e tem exatamente o mesmo histórico -- criado 11/2022, desativado 03/2024, também ausente da CSD atual. Busca adicional na CSD atual por composições com 'PARAM' + 'CONCRETO ARMADO' e por 'UNIFAMILIAR' não encontrou nenhuma composição paramétrica sucessora equivalente (a única família atual com 'UNIFAMILIAR' na descrição é o sistema industrializado de paredes de concreto com fôrma de alumínio/plástico, AF_09/2024 e AF_11/2024 -- calibrada pra outro método construtivo, não deve ser reaproveitada aqui, mesma lógica já registrada na nota da entrada 'Parede + Concreto armado moldado in loco' do mapeamento_sinapi.json). Conclusão: a composição paramétrica única (forma+armação+concretagem embutidos num só R$/m3) parece ter sido descontinuada do catálogo SINAPI sem sucessora direta do mesmo tipo. Usada por 2 entradas do mapeamento_sinapi.json (Pilar/Laje 'Concreto armado moldado in loco' e Laje 'Laje maciça de concreto'). Pendência real para a Fase 6: decompor em códigos separados de forma, armação e concretagem de pilar/laje convencional -- não é um problema de leitura da planilha."
+  }
+]

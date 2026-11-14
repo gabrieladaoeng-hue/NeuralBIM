@@ -1,0 +1,32 @@
+# Ambiente virtual Python (reinstalavel com pip install -r requirements.txt)
+venv/
+.venv/
+**/venv/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# Credenciais (NUNCA versionar)
+.env
+*.pem
+.aws/
+credentials
+
+# Logs
+*.log
+
+# Dados gerados em execucao (lotes recebidos do plugin, estimativas)
+api/dados_recebidos/
+api/static_backup_*/
+validacao_*/backup_antes_dos_testes/
+
+# Arquivos de diagnostico temporarios
+diag*.json
+*_log.json
+
+# Editor / SO
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

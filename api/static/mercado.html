@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estimativa de Mercado</title>
+<script src="/static/formatadores.js?v=2026-10-26"></script>
+<style>
+  /* Tema escuro duplicado nas 5 paginas (index.html, painel.html,
+     fornecedores.html, obra.html, mercado.html) -- sem build step, entao se
+     ajustar as cores aqui, repita a mudanca nas outras 4. */
+  :root {
+    --cor-fundo: #0d1117;
+    --cor-cartao: #161b22;
+    --cor-borda: #30363d;
+    --cor-texto: #e6edf3;
+    --cor-texto-suave: #8b949e;
+    --cor-primaria: #3b82f6;
+    --cor-primaria-escura: #2563eb;
+    --cor-sucesso: #3fb950;
+    --cor-sucesso-fundo: #1a3323;
+    --cor-atencao: #d29922;
+    --cor-atencao-fundo: #3a2f0e;
+    --cor-erro: #f85149;
+    --cor-erro-fundo: #3c1618;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    padding: 24px;
+  }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+
+  .nav-principal {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cor-borda);
+  }
+  .nav-principal a {
+    color: var(--cor-texto-suave);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 0;
+  }
+  .nav-principal a:hover { color: var(--cor-texto); }
+  .nav-principal a.ativo {
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--cor-primaria);
+  }
+
+  .aviso-permanente {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    background: var(--cor-atencao-fundo);
+    border: 1px solid var(--cor-atencao);
+    color: var(--cor-atencao);
+  }
+
+  .topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .botao {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .botao-primario {
+    background: var(--cor-primaria);
+    color: #fff;
+  }
+  .botao-primario:hover { background: var(--cor-primaria-escura); }
+  .botao-primario:disabled { background: #30598f; cursor: not-allowed; }
+
+  .aviso-acao {
+    font-size: 12px;
+    color: var(--cor-atencao);
+    margin-top: 6px;
+    max-width: 260px;
+    text-align: right;
+  }
+
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .cartao-kpi {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .cartao-kpi .rotulo {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--cor-texto-suave);
+    margin-bottom: 6px;
+  }
+  .cartao-kpi .valor {
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .cartao-kpi .subtexto {
+    font-size: 12px;
+    color: var(--cor-texto-suave);
+    margin-top: 4px;
+  }
+
+  .cartao {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .cartao h2 { margin: 0 0 16px; font-size: 16px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--cor-borda); vertical-align: top; }
+  th { color: var(--cor-texto-suave); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+
+  .celula-elemento-expansivel { cursor: pointer; }
+  .celula-elemento-expansivel:hover { text-decoration: underline; }
+  .chevron { display: inline-block; width: 12px; color: var(--cor-texto-suave); }
+
+  .faixa-compacta { display: flex; flex-direction: column; gap: 2px; }
+  .faixa-compacta .rotulo-mini {
+    display: inline-block;
+    min-width: 56px;
+    color: var(--cor-texto-suave);
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  .valor-positivo { color: var(--cor-erro); font-weight: 600; }
+  .valor-negativo { color: var(--cor-sucesso); font-weight: 600; }
+
+  tr.linha-detalhe td { background: #0d1117; padding: 16px 20px 18px; }
+  .grupo-mercado {
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .grupo-mercado:last-child { margin-bottom: 0; }
+  .grupo-mercado h4 {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: var(--cor-texto);
+  }
+  .grupo-mercado .linha-dados {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 12px;
+    font-size: 12.5px;
+  }
+  .grupo-mercado .linha-dados .rotulo {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--cor-texto-suave);
+    margin-bottom: 2px;
+  }
+  .grupo-mercado-secao { margin-bottom: 10px; }
+  .grupo-mercado-secao:last-child { margin-bottom: 0; }
+  .grupo-mercado-secao h5 {
+    margin: 0 0 6px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--cor-texto-suave);
+  }
+  .grupo-mercado-secao ul { margin: 0; padding-left: 18px; }
+  .grupo-mercado-secao li { margin-bottom: 4px; font-size: 12.5px; }
+  .grupo-mercado.erro { border-color: var(--cor-erro); }
+  .grupo-mercado.erro p { color: var(--cor-erro); margin: 0; font-size: 12.5px; }
+
+  .estado-vazio {
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .estado-vazio p { color: var(--cor-texto-suave); margin-bottom: 20px; }
+
+  .carregando {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cor-texto-suave);
+    font-size: 14px;
+    padding: 12px 0;
+  }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid var(--cor-borda);
+    border-top-color: var(--cor-primaria);
+    border-radius: 50%;
+    animation: girar .7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+
+  .rodape-mercado {
+    font-size: 12px;
+    color: var(--cor-texto-suave);
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav-principal">
+    <a href="/painel/">Início</a>
+    <a href="/painel/estimativa">Estimativa de custo</a>
+    <a href="/painel/fornecedores">Fornecedores</a>
+    <a href="/painel/obra">Controle de obra</a>
+    <a href="/painel/mercado" class="ativo">Estimativa de mercado</a>
+  </nav>
+
+  <div class="aviso-permanente">
+    ⚠ Estimativa gerada pelo conhecimento do modelo, sem consulta a fonte externa e sem base oficial. Serve como ordem de grandeza para comparação — não substitui a estimativa SINAPI.
+  </div>
+
+  <div class="topo">
+    <div>
+      <h1>Estimativa de Mercado</h1>
+    </div>
+    <div>
+      <button id="botao-gerar" class="botao botao-primario">Gerar estimativa de mercado</button>
+      <div class="aviso-acao">⚠ Roda a IA pra cada grupo do lote mais recente — pode levar alguns minutos e tem custo de API. Não é um refresh comum.</div>
+    </div>
+  </div>
+
+  <div id="carregando-inicial" class="carregando"><div class="spinner"></div> Carregando...</div>
+
+  <div id="conteudo" style="display:none;">
+
+    <div id="estado-vazio" class="cartao estado-vazio" style="display:none;">
+      <h2>Nenhuma estimativa de mercado gerada ainda</h2>
+      <p>Rode a estimativa pra comparar, no mesmo quantitativo, o preço de mercado (conhecimento da IA) contra o preço SINAPI.</p>
+      <button id="botao-gerar-vazio" class="botao botao-primario">Gerar estimativa de mercado</button>
+    </div>
+
+    <div id="painel-com-dados" style="display:none;">
+
+      <div class="kpis">
+        <div class="cartao-kpi">
+          <div class="rotulo">Custo total provável (mercado)</div>
+          <div class="valor" id="kpi-custo-mercado">—</div>
+          <div class="subtexto" id="kpi-custo-mercado-subtexto"></div>
+        </div>
+        <div class="cartao-kpi">
+          <div class="rotulo">Custo total SINAPI</div>
+          <div class="valor" id="kpi-custo-sinapi">—</div>
+          <div class="subtexto" id="kpi-custo-sinapi-subtexto"></div>
+        </div>
+        <div class="cartao-kpi">
+          <div class="rotulo">Desvio (mercado × SINAPI)</div>
+          <div class="valor" id="kpi-desvio">—</div>
+        </div>
+      </div>
+
+      <div class="cartao">
+        <h2>Comparação por categoria</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Custo SINAPI</th>
+              <th>Faixa de mercado</th>
+              <th>Desvio (provável × SINAPI)</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela-comparacao"></tbody>
+        </table>
+      </div>
+
+      <div class="cartao">
+        <p class="rodape-mercado" id="rodape-mercado"></p>
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  var ultimaEstimativaSinapi = null;
+  var ultimaEstimativaMercado = null;
+
+  // ---------- SINAPI: mesma logica de custoDoItem()/calcularEstimadoPorCategoria()
+  // das outras 3 paginas -- le custo_calculado_rs (versao_schema 2,
+  // calculado em Python, nunca pela IA). Fallback pra arquivos anteriores a
+  // essa mudanca: decomposto tinha componentes_detalhados mas nao
+  // custo_calculado_rs; direto so tinha custo_estimado_rs (valor declarado
+  // pela IA, sem verificacao -- ver achado documentado no CLAUDE.md).
+  // Repetida aqui de proposito (paginas autocontidas, sem build step); se
+  // ajustar essa regra, repita nas outras.
+
+  function custoDoItem(item) {
+    if (typeof item.custo_calculado_rs === "number") {
+      return item.custo_calculado_rs;
+    }
+    if (item.componentes_detalhados && item.componentes_detalhados.length) {
+      var total = 0;
+      item.componentes_detalhados.forEach(function (c) {
+        total += (c.preco_unitario_rs || 0) * (c.quantidade || 0);
+      });
+      return total;
+    }
+    return typeof item.custo_estimado_rs === "number" ? item.custo_estimado_rs : 0;
+  }
+
+  function calcularEstimadoPorCategoria(estimativa) {
+    var totais = { Parede: 0, Laje: 0, Pilar: 0 };
+    if (!estimativa) return totais;
+    (estimativa.estimativa_por_elemento || []).forEach(function (item) {
+      if (item.erro) return;
+      if (Object.prototype.hasOwnProperty.call(totais, item.categoria)) {
+        totais[item.categoria] += custoDoItem(item);
+      }
+    });
+    return totais;
+  }
+
+  function categoriaExisteSinapi(estimativa, categoria) {
+    if (!estimativa) return false;
+    return (estimativa.estimativa_por_elemento || []).some(function (i) { return i.categoria === categoria; });
+  }
+
+  // ---------- Mercado: agrupa por categoria os grupos ja calculados pelo
+  // backend (custo_minimo_rs/custo_provavel_rs/custo_maximo_rs -- nenhum
+  // numero e recalculado aqui, so somado por categoria). Itens com erro
+  // entram em "grupos" (pro detalhe mostrar o motivo) mas nao entram nas
+  // somas de custo.
+
+  function calcularMercadoPorCategoria(estimativaMercado) {
+    var totais = {
+      Parede: { minimo: 0, provavel: 0, maximo: 0, grupos: [] },
+      Laje: { minimo: 0, provavel: 0, maximo: 0, grupos: [] },
+      Pilar: { minimo: 0, provavel: 0, maximo: 0, grupos: [] },
+    };
+    if (!estimativaMercado) return totais;
+    (estimativaMercado.estimativa_por_elemento || []).forEach(function (item) {
+      if (!Object.prototype.hasOwnProperty.call(totais, item.categoria)) return;
+      totais[item.categoria].grupos.push(item);
+      if (item.erro) return;
+      totais[item.categoria].minimo += item.custo_minimo_rs || 0;
+      totais[item.categoria].provavel += item.custo_provavel_rs || 0;
+      totais[item.categoria].maximo += item.custo_maximo_rs || 0;
+    });
+    return totais;
+  }
+
+  function formatarDesvio(valorSinapi, valorMercado) {
+    if (valorSinapi == null || valorMercado == null) return "—";
+    var desvioRs = valorMercado - valorSinapi;
+    var desvioPercentual = valorSinapi ? (desvioRs / valorSinapi) * 100 : null;
+    // Convencao ja usada em index.html/obra.html: positivo (mercado acima do
+    // SINAPI) = vermelho, negativo (abaixo) = verde -- aqui nao ha "certo"
+    // ou "errado", so mantem a mesma paleta de sinal pra consistencia visual
+    // entre paginas.
+    var classe = desvioRs > 0 ? "valor-positivo" : desvioRs < 0 ? "valor-negativo" : "";
+
+    // fmtBRL/fmtNum de um numero NEGATIVO embutem o proprio sinal de menos
+    // (via toLocaleString, que pode usar o caractere Unicode "−" em vez do
+    // hifen normal) -- misturado com o "+" que a gente concatena por fora
+    // pro caso positivo, o resultado fica inconsistente (sinal ora dentro,
+    // ora fora, ora com glifo diferente). Formata sempre o valor ABSOLUTO
+    // (nunca negativo, nunca gera sinal embutido) e concatena o mesmo sinal
+    // "+"/"-" explicito por fora nos dois casos.
+    var sinalValor = desvioRs > 0 ? "+" : desvioRs < 0 ? "-" : "";
+    var valorTexto = sinalValor + fmtBRL(Math.abs(desvioRs));
+
+    var percentualTexto = "";
+    if (desvioPercentual != null) {
+      var sinalPercentual = desvioPercentual > 0 ? "+" : desvioPercentual < 0 ? "-" : "";
+      percentualTexto = " (" + sinalPercentual + fmtNum(Math.abs(desvioPercentual), 1) + "%)";
+    }
+
+    return '<span class="' + classe + '">' + valorTexto + percentualTexto + "</span>";
+  }
+
+  // ---------- Detalhe por grupo (expansivel) ----------
+
+  function montarBlocoGrupo(grupo) {
+    if (grupo.erro) {
+      return (
+        '<div class="grupo-mercado erro"><h4>' + escapeHtml(grupo.elemento_id || "?") + "</h4>" +
+        "<p>Sem estimativa de mercado: " + escapeHtml(grupo.erro) + "</p></div>"
+      );
+    }
+
+    // quantidade vem pronta do backend (campo "quantidade", gravado em
+    // gerar_estimativa_mercado_lote a partir do proprio dados_mercado usado
+    // pra calcular o custo) -- nunca derivar por divisao inversa
+    // (custo_provavel_rs / preco_unitario_provavel_rs), que opera sobre
+    // valores ja arredondados a 2 casas e gera dizima na tela.
+    var quantidade = typeof grupo.quantidade === "number" ? grupo.quantidade : null;
+
+    var html = '<div class="grupo-mercado">';
+    html += "<h4>" + escapeHtml(grupo.elemento_id || "?") + "</h4>";
+
+    html += '<div class="linha-dados">';
+    html += '<div><span class="rotulo">Preço unitário (mín · provável · máx)</span>' +
+      fmtBRL(grupo.preco_unitario_minimo_rs) + " · " + fmtBRL(grupo.preco_unitario_provavel_rs) + " · " + fmtBRL(grupo.preco_unitario_maximo_rs) +
+      " / " + (grupo.unidade || "—") + "</div>";
+    html += '<div><span class="rotulo">Quantidade</span>' + (quantidade != null ? fmtQtd(quantidade, grupo.unidade) + " " + (grupo.unidade || "") : "—") + "</div>";
+    html += '<div><span class="rotulo">Custo calculado (provável)</span>' + fmtBRL(grupo.custo_provavel_rs) + "</div>";
+    html += "</div>";
+
+    html += '<div class="grupo-mercado-secao">';
+    html += "<h5>Premissas declaradas pela IA</h5>";
+    var premissas = grupo.premissas || [];
+    if (premissas.length) {
+      html += "<ul>" + premissas.map(function (p) { return "<li>" + escapeHtml(p) + "</li>"; }).join("") + "</ul>";
+    } else {
+      html += "<p>Nenhuma premissa registrada.</p>";
+    }
+    html += "</div>";
+
+    html += '<div class="grupo-mercado-secao">';
+    html += "<h5>Limitações declaradas pela IA</h5>";
+    var limitacoes = grupo.limitacoes || [];
+    if (limitacoes.length) {
+      html += "<ul>" + limitacoes.map(function (l) { return "<li>" + escapeHtml(l) + "</li>"; }).join("") + "</ul>";
+    } else {
+      html += "<p>Nenhuma limitação registrada.</p>";
+    }
+    html += "</div>";
+
+    html += "</div>";
+    return html;
+  }
+
+  // ---------- Tabela de comparacao ----------
+
+  function renderizarComparacao(estimativaSinapi, estimativaMercado) {
+    var corpo = document.getElementById("corpo-tabela-comparacao");
+    corpo.innerHTML = "";
+
+    var sinapiPorCategoria = calcularEstimadoPorCategoria(estimativaSinapi);
+    var mercadoPorCategoria = calcularMercadoPorCategoria(estimativaMercado);
+
+    ["Parede", "Laje", "Pilar"].forEach(function (categoria) {
+      var existeSinapi = categoriaExisteSinapi(estimativaSinapi, categoria);
+      var grupos = mercadoPorCategoria[categoria].grupos;
+      var existeMercado = grupos.length > 0;
+
+      var valorSinapi = existeSinapi ? sinapiPorCategoria[categoria] : null;
+      var temSucessoMercado = grupos.some(function (g) { return !g.erro; });
+
+      var linha = document.createElement("tr");
+      var celulaCategoria = document.createElement("td");
+      celulaCategoria.className = "celula-elemento-expansivel";
+      celulaCategoria.innerHTML = '<span class="chevron">▸</span> ' + categoria;
+
+      var celulaSinapi = document.createElement("td");
+      celulaSinapi.textContent = existeSinapi ? fmtBRL(valorSinapi) : "—";
+
+      var celulaFaixa = document.createElement("td");
+      if (existeMercado && temSucessoMercado) {
+        var m = mercadoPorCategoria[categoria];
+        celulaFaixa.innerHTML =
+          '<div class="faixa-compacta">' +
+          '<div><span class="rotulo-mini">Mín</span>' + fmtBRL(m.minimo) + "</div>" +
+          '<div><span class="rotulo-mini">Provável</span>' + fmtBRL(m.provavel) + "</div>" +
+          '<div><span class="rotulo-mini">Máx</span>' + fmtBRL(m.maximo) + "</div>" +
+          "</div>";
+      } else {
+        celulaFaixa.textContent = "—";
+      }
+
+      var celulaDesvio = document.createElement("td");
+      if (existeSinapi && existeMercado && temSucessoMercado) {
+        celulaDesvio.innerHTML = formatarDesvio(valorSinapi, mercadoPorCategoria[categoria].provavel);
+      } else {
+        celulaDesvio.textContent = "—";
+      }
+
+      linha.appendChild(celulaCategoria);
+      linha.appendChild(celulaSinapi);
+      linha.appendChild(celulaFaixa);
+      linha.appendChild(celulaDesvio);
+      corpo.appendChild(linha);
+
+      var linhaDetalhe = document.createElement("tr");
+      linhaDetalhe.className = "linha-detalhe";
+      linhaDetalhe.style.display = "none";
+      var celulaDetalhe = document.createElement("td");
+      celulaDetalhe.colSpan = 4;
+      if (grupos.length) {
+        celulaDetalhe.innerHTML = grupos.map(montarBlocoGrupo).join("");
+      } else {
+        celulaDetalhe.innerHTML = '<p style="color:var(--cor-texto-suave); font-size:12.5px; margin:0;">Nenhum grupo de mercado nesta categoria.</p>';
+      }
+      linhaDetalhe.appendChild(celulaDetalhe);
+      corpo.appendChild(linhaDetalhe);
+
+      celulaCategoria.addEventListener("click", function () {
+        var aberto = linhaDetalhe.style.display !== "none";
+        linhaDetalhe.style.display = aberto ? "none" : "table-row";
+        celulaCategoria.querySelector(".chevron").textContent = aberto ? "▸" : "▾";
+      });
+    });
+  }
+
+  // ---------- KPIs ----------
+
+  function renderizarKpis(estimativaSinapi, estimativaMercado) {
+    var sinapiPorCategoria = calcularEstimadoPorCategoria(estimativaSinapi);
+    var custoTotalSinapi = estimativaSinapi
+      ? sinapiPorCategoria.Parede + sinapiPorCategoria.Laje + sinapiPorCategoria.Pilar
+      : null;
+
+    var custoTotalMercadoMinimo = typeof estimativaMercado.custo_total_minimo_rs === "number" ? estimativaMercado.custo_total_minimo_rs : null;
+    var custoTotalMercadoProvavel = typeof estimativaMercado.custo_total_provavel_rs === "number" ? estimativaMercado.custo_total_provavel_rs : null;
+    var custoTotalMercadoMaximo = typeof estimativaMercado.custo_total_maximo_rs === "number" ? estimativaMercado.custo_total_maximo_rs : null;
+
+    document.getElementById("kpi-custo-mercado").textContent = custoTotalMercadoProvavel != null ? fmtBRL(custoTotalMercadoProvavel) : "—";
+    document.getElementById("kpi-custo-mercado-subtexto").textContent =
+      custoTotalMercadoMinimo != null && custoTotalMercadoMaximo != null
+        ? "Faixa: " + fmtBRL(custoTotalMercadoMinimo) + " – " + fmtBRL(custoTotalMercadoMaximo)
+        : "";
+
+    document.getElementById("kpi-custo-sinapi").textContent = custoTotalSinapi != null ? fmtBRL(custoTotalSinapi) : "—";
+    document.getElementById("kpi-custo-sinapi-subtexto").textContent = estimativaSinapi
+      ? (estimativaSinapi.oficial && estimativaSinapi.oficial.congelada ? "Estimativa oficial congelada" : "Estimativa SINAPI mais recente")
+      : "Nenhuma estimativa SINAPI gerada ainda.";
+
+    var elDesvio = document.getElementById("kpi-desvio");
+    if (custoTotalSinapi != null && custoTotalMercadoProvavel != null) {
+      elDesvio.innerHTML = formatarDesvio(custoTotalSinapi, custoTotalMercadoProvavel);
+    } else {
+      elDesvio.textContent = "—";
+    }
+  }
+
+  // ---------- Rodape (tokens + data de geracao) ----------
+
+  function formatarDataHora(iso) {
+    if (!iso) return "—";
+    var data = new Date(iso);
+    if (isNaN(data.getTime())) return iso;
+    var dataTexto = data.toLocaleDateString("pt-BR");
+    var horaTexto = data.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+    return dataTexto + " às " + horaTexto;
+  }
+
+  // O JSON do modo mercado nao grava um campo de data separado (nao tem
+  // GET /estimativa/historico equivalente pra ler do disco, ver Etapa 8b) --
+  // a unica informacao de "quando" e o proprio timestamp no nome do arquivo
+  // (estimativa_mercado_{lote}_{timestamp}.json). So parsing de string de um
+  // campo que ja existe, nao e um dado novo.
+  function dataGeracaoDoArquivo(nomeArquivo) {
+    if (!nomeArquivo) return null;
+    var m = nomeArquivo.match(/(\d{4}-\d{2}-\d{2})_(\d{2})-(\d{2})-(\d{2})\.json$/);
+    if (!m) return null;
+    return m[1] + "T" + m[2] + ":" + m[3] + ":" + m[4];
+  }
+
+  function renderizarRodape(estimativaMercado) {
+    var uso = estimativaMercado.uso_tokens_total_lote || {};
+    var dataIso = dataGeracaoDoArquivo(estimativaMercado.arquivo);
+    document.getElementById("rodape-mercado").textContent =
+      "Gerado em " + formatarDataHora(dataIso) +
+      " · Tokens (entrada/saída/total): " +
+      (uso.tokens_entrada != null ? uso.tokens_entrada : "—") + " / " +
+      (uso.tokens_saida != null ? uso.tokens_saida : "—") + " / " +
+      (uso.tokens_total != null ? uso.tokens_total : "—");
+  }
+
+  // ---------- Estado geral ----------
+
+  function mostrarEstadoVazio() {
+    document.getElementById("estado-vazio").style.display = "block";
+    document.getElementById("painel-com-dados").style.display = "none";
+  }
+
+  function mostrarPainelComDados() {
+    document.getElementById("estado-vazio").style.display = "none";
+    document.getElementById("painel-com-dados").style.display = "block";
+    renderizarKpis(ultimaEstimativaSinapi, ultimaEstimativaMercado);
+    renderizarComparacao(ultimaEstimativaSinapi, ultimaEstimativaMercado);
+    renderizarRodape(ultimaEstimativaMercado);
+  }
+
+  function carregarEstimativaSinapi() {
+    return fetch("/estimativa/ultima").then(function (resposta) {
+      if (resposta.status === 404) return null;
+      if (!resposta.ok) throw new Error("Falha ao carregar estimativa SINAPI (HTTP " + resposta.status + ")");
+      return resposta.json();
+    });
+  }
+
+  function carregarEstimativaMercado() {
+    return fetch("/estimativa/mercado/ultima").then(function (resposta) {
+      if (resposta.status === 404) return null;
+      if (!resposta.ok) throw new Error("Falha ao carregar estimativa de mercado (HTTP " + resposta.status + ")");
+      return resposta.json();
+    });
+  }
+
+  function carregarTudo() {
+    return Promise.all([carregarEstimativaSinapi(), carregarEstimativaMercado()]).then(function (resultados) {
+      ultimaEstimativaSinapi = resultados[0];
+      ultimaEstimativaMercado = resultados[1];
+      if (!ultimaEstimativaMercado) {
+        mostrarEstadoVazio();
+        return;
+      }
+      mostrarPainelComDados();
+    });
+  }
+
+  // ---------- Gerar estimativa de mercado ----------
+
+  function gerarEstimativaMercado() {
+    var botoes = [document.getElementById("botao-gerar"), document.getElementById("botao-gerar-vazio")];
+    botoes.forEach(function (b) { if (b) { b.disabled = true; } });
+
+    var indicador = document.createElement("div");
+    indicador.className = "carregando";
+    indicador.id = "carregando-analise";
+    indicador.innerHTML = '<div class="spinner"></div> Rodando estimativa de mercado via IA (Bedrock) para todos os grupos do lote mais recente — pode levar alguns minutos...';
+    document.querySelector(".topo").insertAdjacentElement("afterend", indicador);
+
+    fetch("/estimativa/gerar-mercado", { method: "POST" })
+      .then(function (resposta) {
+        if (!resposta.ok) throw new Error("Falha ao gerar estimativa de mercado (HTTP " + resposta.status + ")");
+        return resposta.json();
+      })
+      .then(function () {
+        return carregarTudo();
+      })
+      .catch(function (e) {
+        alert("Erro ao gerar a estimativa de mercado: " + e.message);
+      })
+      .finally(function () {
+        botoes.forEach(function (b) { if (b) { b.disabled = false; } });
+        var el = document.getElementById("carregando-analise");
+        if (el) el.remove();
+      });
+  }
+
+  document.getElementById("botao-gerar").addEventListener("click", gerarEstimativaMercado);
+  document.getElementById("botao-gerar-vazio").addEventListener("click", gerarEstimativaMercado);
+
+  // ---------- Inicializacao ----------
+
+  carregarTudo()
+    .catch(function (e) {
+      console.error(e);
+    })
+    .finally(function () {
+      document.getElementById("carregando-inicial").style.display = "none";
+      document.getElementById("conteudo").style.display = "block";
+    });
+})();
+</script>
+</body>
+</html>

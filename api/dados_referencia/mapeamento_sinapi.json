@@ -1,0 +1,302 @@
+{
+  "_leia_isto_primeiro": {
+    "proposito": "Mapeia cada valor possivel do campo Material_Estrutural (exportado pelo plugin NeuralBIM, caminho automatico ou manual) para o codigo SINAPI correspondente. Nao contem precos em R$ -- o valor atual sera consultado pelo modulo de IA (Fase 6, RAG + AWS Bedrock) a partir da base SINAPI-PR vigente. Este arquivo so precisa estar correto e completo o suficiente pra apontar o codigo certo.",
+    "fonte_dos_codigos": "SINAPI (Caixa Economica Federal / IBGE). Codigos e unidades sao os mesmos em qualquer estado -- so o preco em R$ varia por UF, e esse preco fica de fora deste arquivo.",
+    "regime_assumido": "nao desonerado",
+    "fck_padrao_mpa": 25,
+    "nota_fck": "O vocabulario de materiais do plugin nao distingue fck do concreto -- fck=25MPa e assumido como padrao fixo para toda categoria de concreto armado moldado in loco (parede, laje, pilar). Registrar isso como suposicao em Observacoes ao aplicar o preco, mesmo padrao ja usado para a aproximacao de profundidade de pilar.",
+    "taxa_armadura_kg_por_m3": { "pilar": 130, "laje": 75 },
+    "nota_armadura": "O modelo BIM nao tem elementos Rebar modelados, entao o peso de armacao nao e extraido diretamente do Revit. Taxas assumidas (pontos medios de faixas usuais de pre-dimensionamento por elemento estrutural) multiplicadas pelo Volume_m3 do elemento estimam o peso de aco em kg. Esse peso estimado sera precificado por um codigo SINAPI de 'armacao' cotado por kg na Fase 6 -- a escolha do codigo ainda esta pendente, so a taxa e a logica de calculo estao registradas aqui.",
+    "nota_bitola_armadura": "Bitola representativa assumida para o codigo de armacao: CA-50 10,0mm para pilar (codigo 92762) e CA-50 8,0mm para laje (codigo 92770) -- aproximacao usual de pre-dimensionamento (barra principal media), ja que o modelo BIM nao distingue bitolas reais.",
+    "resumo_bitola_armadura": "Bitola de armação assumida: CA-50 10,0 mm em pilares e CA-50 8,0 mm em lajes.",
+    "nota_forma_concretagem": "Suposicoes assumidas para os componentes de forma e concretagem em pilar e nas entradas de laje decomposta ('Concreto armado moldado in loco' e 'Laje maciça de concreto' -- mantidas no mapeamento, mas NAO usadas pela laje real da obra apos a revisao de engenharia registrada abaixo): (1) PILAR -- forma em madeira serrada com 4 UTILIZACOES (codigo 92413, montagem/desmontagem) -- revisado de 1 utilizacao (codigo 92409, mantido em preco_sinapi_pr.json porque os 18+ arquivos de estimativa antigos referenciam ele, mas nao usado em geracoes novas) apos revisao de engenharia: a justificativa deixa de ser 'sem reaproveitamento entre pavimentos' (que exigia predio de varios pavimentos) e passa a ser reaproveitamento dos PAINEIS ENTRE OS PILARES de secao identica do MESMO pavimento -- nao depende de haver outro pavimento, entao vale mesmo pra obra terrea de um pavimento so. LAJE decomposta -- forma (codigo 92482, unico, ja soma fabricacao+montagem+desmontagem) mantida em 1 utilizacao, sem revisao (essas entradas de laje decomposta nao sao mais o caso real da obra, ver abaixo); (2) concretagem por LANCAMENTO MANUAL COM BALDES pra pilar e laje decomposta -- metodo convencional que a propria SINAPI reconhece como padrao para edificacao terrea (nao bombeavel), coerente com os codigos 103669 (pilar) e 103682 (laje) que ja sao explicitos 'para edificacao terrea' na descricao. REVISAO DE ENGENHARIA (laje real da obra): o elemento da casa terrea que era tratado como laje estrutural moldada in loco na verdade e PISO SOBRE SOLO (codigo 103076, resolucao 'direto', sem componente de forma/armacao avulso no mapeamento -- ja embutidos no preco por m2); e a laje real de cobertura e PRE-MOLDADA TRELICADA (codigo 106059, resolucao 'direto') -- tambem ja embute forma e armacao no preco por m2, entao NAO usa nenhum dos componentes decompostos (armacao/forma/concretagem) descritos aqui. As entradas de laje decomposta continuam no mapeamento, validas caso apareca um projeto futuro com laje moldada in loco de verdade.",
+    "resumo_forma_concretagem": "Forma de madeira reaproveitada entre os pilares de seção idêntica do mesmo pavimento (4 utilizações) e concretagem manual com baldes, para pilar e para as entradas de laje decomposta (não usadas pela laje real desta obra). A laje real de cobertura é pré-moldada treliçada e o piso térreo é piso sobre solo — nenhum dos dois usa fôrma nem armação avulsa, já embutidas na composição.",
+    "como_resolver_uma_categoria": [
+      "1. Ler o campo 'elemento' do registro extraido (Parede / Laje / Pilar) e o campo 'Material_Estrutural'.",
+      "2. Procurar em 'mapeamento' uma entrada cujo 'elemento' contenha esse elemento e cujo 'material_estrutural' contenha esse valor (comparacao exata de string, sem normalizacao adicional).",
+      "3. Se 'resolucao' for 'direto': usar 'codigo_sinapi' e 'unidade' diretamente.",
+      "4. Se 'resolucao' for 'por_espessura_estrutural_cm': usar o campo Espessura_Estrutural_cm do registro e escolher, dentro de 'buckets', o bucket cujo 'espessura_cm' esta mais proximo (nao exigir igualdade exata -- medicao geometrica real nao bate com o valor nominal do catalogo).",
+      "5. Se 'resolucao' for 'sem_preco' ou 'fora_de_escopo': nao aplicar preco automatico; registrar em Observacoes que o item ficou sem correspondencia e precisa de revisao manual do engenheiro.",
+      "6. Se 'resolucao' for 'pendente': o codigo ainda nao foi confirmado contra a planilha oficial -- tratar como 'sem_preco' ate ser preenchido.",
+      "7. Se 'resolucao' for 'decomposto': somar o custo de cada item em 'componentes' -- cada componente tem sua propria unidade e sua propria regra de 'quantidade' (ex.: Volume_m3, Area_Forma_m2), calcular essa quantidade e buscar o 'codigo_sinapi' proprio do componente (mesma logica dos passos 3 a 6 acima, aplicada por componente). Se um componente estiver com resolucao 'pendente' ou codigo_sinapi null, registrar em Observacoes que aquele componente ficou sem preco e precisa de revisao manual -- nao pular o componente silenciosamente. O resultado final da categoria e a soma dos subtotais (preco unitario x quantidade) dos componentes que tiverem codigo resolvido."
+    ]
+  },
+
+  "mapeamento": [
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Alvenaria de bloco ceramico",
+      "origem": "automatica (VOCABULARIO_MATERIAIS)",
+      "resolucao": "por_espessura_estrutural_cm",
+      "buckets": [
+        { "espessura_cm": 9,    "codigo_sinapi": "103351", "unidade": "M2", "descricao": "Alvenaria vedacao bloco ceramico furado horizontal, 9cm, preparo manual", "codigo_confirmado": true },
+        { "espessura_cm": 11.5, "codigo_sinapi": "103344", "unidade": "M2", "descricao": "Alvenaria vedacao bloco ceramico furado horizontal, 11,5cm, preparo em betoneira", "codigo_confirmado": true },
+        { "espessura_cm": 14,   "codigo_sinapi": "103335", "unidade": "M2", "descricao": "Alvenaria vedacao bloco ceramico furado horizontal 14x9x19cm (6 furos), preparo manual", "codigo_confirmado": true },
+        { "espessura_cm": 19,   "codigo_sinapi": "103362", "unidade": "M2", "descricao": "Alvenaria vedacao bloco ceramico furado horizontal 19x19x29cm (9 furos), preparo em betoneira", "codigo_confirmado": true, "preco_pr_referencia": { "valor": 120.36, "regime": "onerado", "mes_ref": "2026-07", "fonte": "buscadorsinapi.com.br" } }
+      ]
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Bloco ceramico de vedacao 6 furos",
+      "origem": "manual (MATERIAIS_ESTRUTURAIS)",
+      "resolucao": "direto",
+      "codigo_sinapi": "103335",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "Mesmo codigo do bucket de 14cm automatico -- 6 furos identifica um bloco especifico do SINAPI, nao precisa checar espessura medida."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Bloco ceramico de vedacao 9 furos",
+      "origem": "manual (MATERIAIS_ESTRUTURAIS)",
+      "resolucao": "direto",
+      "codigo_sinapi": "103362",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "preco_pr_referencia": { "valor": 120.36, "regime": "onerado", "mes_ref": "2026-07", "fonte": "buscadorsinapi.com.br" },
+      "nota": "9 furos identifica o mesmo bloco do bucket de 19cm automatico."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Bloco ceramico estrutural",
+      "origem": "manual (MATERIAIS_ESTRUTURAIS)",
+      "resolucao": "direto",
+      "codigo_sinapi": "89306",
+      "unidade": "M2",
+      "codigo_confirmado": false,
+      "nota": "Alvenaria estrutural 14x19x29cm, metodo colher de pedreiro. So essa espessura foi levantada -- confirmar contra planilha oficial se aparecer no projeto real."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Alvenaria de bloco de concreto",
+      "origem": "automatica (VOCABULARIO_MATERIAIS)",
+      "resolucao": "por_espessura_estrutural_cm",
+      "buckets": [
+        { "espessura_cm": 9,  "codigo_sinapi": "103336", "unidade": "M2", "descricao": "Alvenaria vedacao bloco vazado de concreto, 9cm", "codigo_confirmado": false },
+        { "espessura_cm": 14, "codigo_sinapi": "103319", "unidade": "M2", "descricao": "Alvenaria vedacao bloco vazado de concreto 14x19x39cm, 14cm, preparo manual", "codigo_confirmado": true },
+        { "espessura_cm": 19, "codigo_sinapi": "103340", "unidade": "M2", "descricao": "Alvenaria vedacao bloco vazado de concreto, 19cm", "codigo_confirmado": false }
+      ]
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Bloco de concreto de vedacao",
+      "origem": "manual (MATERIAIS_ESTRUTURAIS)",
+      "resolucao": "direto",
+      "codigo_sinapi": "103319",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "Mesmo tratamento da categoria automatica equivalente -- usar bucket de 14cm como padrao ate haver motivo pra diferenciar."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Bloco de concreto estrutural",
+      "origem": "manual (MATERIAIS_ESTRUTURAIS)",
+      "resolucao": "direto",
+      "codigo_sinapi": "89462",
+      "unidade": "M2",
+      "codigo_confirmado": false,
+      "nota": "Alvenaria estrutural bloco de concreto fbk=4,5MPa, 14x19x29cm. So essa espessura foi levantada."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": ["Alvenaria de tijolo ceramico macico", "Tijolo ceramico macico"],
+      "origem": "automatica e manual",
+      "resolucao": "pendente",
+      "codigo_sinapi": null,
+      "unidade": null,
+      "nota": "Grupo existe no SINAPI (tijolo ceramico macico 5x10x20cm, varias espessuras) mas nenhum codigo foi confirmado com confianca suficiente ainda -- verificar direto na planilha SINAPI-PR oficial antes de usar."
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Drywall (gesso acartonado)",
+      "origem": "automatica e manual (mesmo texto nos dois)",
+      "resolucao": "direto",
+      "codigo_sinapi": "96358",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "Configuracao padrao assumida: uso interno, duas faces simples, guias simples, sem vaos. Existem ~10 variacoes (faces/guias simples ou duplas, com/sem vaos) -- essa e a mais generica, ajustar se o projeto real pedir outra config especifica."
+    },
+
+    {
+      "elemento": ["Pilar"],
+      "material_estrutural": "Concreto armado moldado in loco",
+      "origem": "automatica e manual (mesmo texto nos dois)",
+      "resolucao": "decomposto",
+      "nota": "Composicao parametrica unica (104487 versao terrea, 104484 versao dois pavimentos) descontinuada na referencia SINAPI em 03/2024, sem sucessora do mesmo tipo (ver Padroes consolidados na Fase 5, CLAUDE.md). Substituida por 3 componentes calculados separadamente e somados.",
+      "componentes": [
+        {
+          "componente": "armacao",
+          "resolucao": "direto",
+          "codigo_sinapi": "92762",
+          "unidade": "KG",
+          "quantidade": "Volume_m3 do pilar x taxa_armadura_kg_por_m3.pilar (ver nota_armadura / nota_bitola_armadura)",
+          "codigo_confirmado": true
+        },
+        {
+          "componente": "forma_fabricacao",
+          "resolucao": "direto",
+          "codigo_sinapi": "92269",
+          "unidade": "M2",
+          "quantidade": "Area_Forma_m2 do pilar (calculo exato: perimetro da secao x altura)",
+          "codigo_confirmado": true,
+          "nota": "Fabricacao da forma, madeira serrada (ver nota_forma_concretagem)."
+        },
+        {
+          "componente": "forma_montagem_desmontagem",
+          "resolucao": "direto",
+          "codigo_sinapi": "92413",
+          "unidade": "M2",
+          "quantidade": "Area_Forma_m2 do pilar (calculo exato: perimetro da secao x altura)",
+          "codigo_confirmado": true,
+          "nota": "Montagem e desmontagem da forma, madeira serrada, pe-direito simples, 4 UTILIZACOES -- revisado de 1 utilizacao (codigo 92409, mantido em preco_sinapi_pr.json por compatibilidade com estimativas antigas) apos revisao de engenharia: reaproveitamento dos paineis entre os pilares de secao identica do mesmo pavimento (ver nota_forma_concretagem)."
+        },
+        {
+          "componente": "concretagem",
+          "resolucao": "direto",
+          "codigo_sinapi": "103669",
+          "unidade": "M3",
+          "quantidade": "Volume_m3 do pilar",
+          "codigo_confirmado": true,
+          "nota": "Concretagem de pilares com baldes, fck=25MPa -- lancamento, adensamento e acabamento (ver nota_forma_concretagem)."
+        }
+      ]
+    },
+    {
+      "elemento": ["Laje"],
+      "material_estrutural": "Concreto armado moldado in loco",
+      "origem": "automatica e manual (mesmo texto nos dois)",
+      "resolucao": "decomposto",
+      "nota": "Composicao parametrica unica (104487 versao terrea, 104484 versao dois pavimentos) descontinuada na referencia SINAPI em 03/2024, sem sucessora do mesmo tipo (ver Padroes consolidados na Fase 5, CLAUDE.md). Substituida por 3 componentes calculados separadamente e somados.",
+      "componentes": [
+        {
+          "componente": "armacao",
+          "resolucao": "direto",
+          "codigo_sinapi": "92770",
+          "unidade": "KG",
+          "quantidade": "Volume_m3 da laje x taxa_armadura_kg_por_m3.laje (ver nota_armadura / nota_bitola_armadura)",
+          "codigo_confirmado": true
+        },
+        {
+          "componente": "forma",
+          "resolucao": "direto",
+          "codigo_sinapi": "92482",
+          "unidade": "M2",
+          "quantidade": "Area_Forma_m2 da laje (aproximacao via HOST_AREA_COMPUTED, ver Observacoes do registro)",
+          "codigo_confirmado": true,
+          "nota": "Diferente do componente forma de pilar (que soma 2 codigos), este codigo unico ja inclui fabricacao + montagem + desmontagem da forma num so preco (madeira serrada, pe-direito simples, 1 utilizacao -- ver nota_forma_concretagem)."
+        },
+        {
+          "componente": "concretagem",
+          "resolucao": "direto",
+          "codigo_sinapi": "103682",
+          "unidade": "M3",
+          "quantidade": "Volume_m3 da laje",
+          "codigo_confirmado": true,
+          "nota": "Concretagem de vigas e lajes com baldes, fck=25MPa, especifico para edificacao terrea (ver nota_forma_concretagem)."
+        }
+      ]
+    },
+
+    {
+      "elemento": ["Parede"],
+      "material_estrutural": "Concreto armado moldado in loco",
+      "origem": "automatica (VOCABULARIO_MATERIAIS, chave 'concreto') e manual (MATERIAIS_ESTRUTURAIS, item 8) -- alcancavel nos dois caminhos, mas nao tinha nenhuma entrada de mapeamento ate esta correcao",
+      "resolucao": "fora_de_escopo",
+      "nota": "Parede de concreto moldado in loco nao e usada na obra do projeto real de validacao -- confirmado com o usuario. Fica sem codigo de preco por decisao deliberada (nao e uma lacuna esquecida). Se precisar no futuro: NAO reaproveitar 104487 (calibrado pra pilar/viga/laje, nao pra parede fina vertical) nem a familia SINAPI de 'Paredes de Concreto - Formas' com sistema de forma de aluminio (Caderno Tecnico proprio, ligado a NBR 16055) -- essa e calibrada pra edificacoes industrializadas de multiplos pavimentos, nao representa uma parede avulsa de casa terrea. Buscar composicao decomposta especifica (forma+armacao+concretagem de parede) se o caso realmente aparecer."
+    },
+
+    {
+      "elemento": ["Laje"],
+      "material_estrutural": "Laje maciça de concreto",
+      "origem": "manual (OPCOES_MATERIAL_LAJE)",
+      "resolucao": "decomposto",
+      "nota": "Mesma coisa fisica da entrada 'Concreto armado moldado in loco' (Laje) acima, nome diferente no formulario manual -- mesma decomposicao em 3 componentes.",
+      "componentes": [
+        {
+          "componente": "armacao",
+          "resolucao": "direto",
+          "codigo_sinapi": "92770",
+          "unidade": "KG",
+          "quantidade": "Volume_m3 da laje x taxa_armadura_kg_por_m3.laje (ver nota_armadura / nota_bitola_armadura)",
+          "codigo_confirmado": true
+        },
+        {
+          "componente": "forma",
+          "resolucao": "direto",
+          "codigo_sinapi": "92482",
+          "unidade": "M2",
+          "quantidade": "Area_Forma_m2 da laje (aproximacao via HOST_AREA_COMPUTED, ver Observacoes do registro)",
+          "codigo_confirmado": true,
+          "nota": "Ver nota equivalente na entrada 'Concreto armado moldado in loco' (Laje) acima."
+        },
+        {
+          "componente": "concretagem",
+          "resolucao": "direto",
+          "codigo_sinapi": "103682",
+          "unidade": "M3",
+          "quantidade": "Volume_m3 da laje",
+          "codigo_confirmado": true,
+          "nota": "Ver nota equivalente na entrada 'Concreto armado moldado in loco' (Laje) acima."
+        }
+      ]
+    },
+
+    {
+      "elemento": ["Laje"],
+      "material_estrutural": ["Laje pre-moldada", "Laje pre-moldada / trelicada"],
+      "origem": "automatica ('Laje pre-moldada') e manual ('Laje pre-moldada / trelicada') -- textos diferentes, mesmo codigo",
+      "resolucao": "direto",
+      "codigo_sinapi": "101959",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "Laje pre-moldada unidirecional com vigota, ja embute forma+armacao+concretagem no preco por m2. Unidade M2, nao M3 -- diferente de todas as outras entradas de laje/pilar. Considerar unificar o texto entre vocabulario automatico e formulario manual num proximo ajuste de codigo (nao bloqueia o uso do mapeamento)."
+    },
+
+    {
+      "elemento": ["Laje"],
+      "material_estrutural": "Piso sobre solo",
+      "origem": "manual (revisao de engenharia -- elemento que antes era tratado como laje estrutural)",
+      "resolucao": "direto",
+      "codigo_sinapi": "103076",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "EXECUCAO DE LAJE SOBRE SOLO, ESPESSURA DE 10 CM, FCK = 30 MPA, COM USO DE FORMAS EM MADEIRA SERRADA. AF_07/2026. Preco ja embute forma e concretagem -- nao e componente decomposto, e um piso apoiado direto no solo, nao uma laje estrutural suspensa."
+    },
+
+    {
+      "elemento": ["Laje"],
+      "material_estrutural": "Laje pre-moldada trelicada (cobertura/forro)",
+      "origem": "manual (revisao de engenharia -- laje real de cobertura da casa terrea)",
+      "resolucao": "direto",
+      "codigo_sinapi": "106059",
+      "unidade": "M2",
+      "codigo_confirmado": true,
+      "nota": "LAJE PRE-MOLDADA UNIDIRECIONAL, BIAPOIADA, PARA FORRO, ENCHIMENTO EM CERAMICA, VIGOTA TRELICADA, ALTURA TOTAL DA LAJE \"LT\" = 12 CM (ENCHIMENTO+CAPA) = (8+4). AF_08/2025. Diferente da entrada 'Laje pre-moldada'/'Laje pre-moldada / trelicada' acima (codigo 101959, vigota protendida, para piso) -- esta e vigota trelicada, para forro/cobertura. Ja embute forma e armacao no preco por m2, mesmo padrao do codigo 101959."
+    },
+
+    {
+      "elemento": ["Parede", "Laje", "Pilar"],
+      "material_estrutural": "Nao definido / outro",
+      "origem": "manual (as 3 listas)",
+      "resolucao": "sem_preco",
+      "nota": "Usuario optou por nao classificar -- revisao manual do engenheiro antes de custear."
+    },
+
+    {
+      "elemento": ["Pilar"],
+      "material_estrutural": ["Aco estrutural", "Madeira laminada colada"],
+      "origem": "manual (OPCOES_MATERIAL_PILAR)",
+      "resolucao": "fora_de_escopo",
+      "nota": "Fora de escopo por enquanto -- projeto real de validacao (Etapa 8) usa apenas concreto armado. Adicionar codigo se aparecer pilar de aco ou madeira num projeto futuro."
+    }
+  ]
+}

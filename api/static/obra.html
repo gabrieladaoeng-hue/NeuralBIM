@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Controle de Obra</title>
+<script src="/static/formatadores.js?v=2026-10-26"></script>
+<style>
+  /* Tema escuro duplicado nas 4 paginas (index.html, painel.html,
+     fornecedores.html, obra.html) -- sem build step, entao se ajustar as
+     cores aqui, repita a mudanca nas outras 3. */
+  :root {
+    --cor-fundo: #0d1117;
+    --cor-cartao: #161b22;
+    --cor-borda: #30363d;
+    --cor-texto: #e6edf3;
+    --cor-texto-suave: #8b949e;
+    --cor-primaria: #3b82f6;
+    --cor-primaria-escura: #2563eb;
+    --cor-sucesso: #3fb950;
+    --cor-erro: #f85149;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    padding: 24px;
+  }
+  h1 { font-size: 22px; margin: 0 0 24px; }
+
+  .nav-principal {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cor-borda);
+  }
+  .nav-principal a {
+    color: var(--cor-texto-suave);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 0;
+  }
+  .nav-principal a:hover { color: var(--cor-texto); }
+  .nav-principal a.ativo {
+    color: var(--cor-primaria);
+    border-bottom: 2px solid var(--cor-primaria);
+  }
+
+  .botao {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s ease;
+  }
+  .botao-primario {
+    background: var(--cor-primaria);
+    color: #fff;
+  }
+  .botao-primario:hover { background: var(--cor-primaria-escura); }
+
+  .cartao {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .cartao h2 { margin: 0 0 16px; font-size: 16px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--cor-borda); vertical-align: middle; }
+  th { color: var(--cor-texto-suave); font-weight: 600; font-size: 12px; text-transform: uppercase; }
+
+  .cartoes-categoria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .cartao-categoria {
+    background: var(--cor-cartao);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .cartao-categoria h3 { margin: 0 0 12px; font-size: 14px; }
+  .cartao-categoria .linha-valor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--cor-borda);
+  }
+  .cartao-categoria .linha-valor:last-child { border-bottom: none; }
+  .cartao-categoria .linha-valor .rotulo-linha { color: var(--cor-texto-suave); }
+  .valor-positivo { color: var(--cor-erro); font-weight: 600; }
+  .valor-negativo { color: var(--cor-sucesso); font-weight: 600; }
+
+  .carregando {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--cor-texto-suave);
+    font-size: 14px;
+    padding: 12px 0;
+  }
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid var(--cor-borda);
+    border-top-color: var(--cor-primaria);
+    border-radius: 50%;
+    animation: girar .7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes girar { to { transform: rotate(360deg); } }
+
+  .form-gasto {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .form-gasto label {
+    display: block;
+    font-size: 12px;
+    color: var(--cor-texto-suave);
+    margin-bottom: 4px;
+  }
+  .form-gasto input,
+  .form-gasto select {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    font-size: 13px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+  }
+  .form-gasto input.invalido { border-color: var(--cor-erro); }
+  .form-gasto .acoes { display: flex; align-items: flex-end; }
+  .mensagem-erro-form { color: var(--cor-erro); font-size: 11px; margin-top: 4px; min-height: 14px; }
+
+  .botao-excluir {
+    background: transparent;
+    border: 1px solid var(--cor-erro);
+    color: var(--cor-erro);
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .botao-excluir:hover { background: var(--cor-erro); color: #fff; }
+</style>
+</head>
+<body>
+
+  <nav class="nav-principal">
+    <a href="/painel/">Início</a>
+    <a href="/painel/estimativa">Estimativa de custo</a>
+    <a href="/painel/fornecedores">Fornecedores</a>
+    <a href="/painel/obra" class="ativo">Controle de obra</a>
+    <a href="/painel/mercado">Estimativa de mercado</a>
+  </nav>
+
+  <h1>Controle de Obra</h1>
+
+  <div id="carregando-inicial" class="carregando"><div class="spinner"></div> Carregando gastos...</div>
+
+  <div id="conteudo" style="display:none;">
+
+    <div class="cartoes-categoria">
+      <div class="cartao-categoria">
+        <h3>Parede</h3>
+        <div class="linha-valor"><span class="rotulo-linha">Estimado</span><span id="parede-estimado">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Gasto real</span><span id="parede-gasto">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Desvio</span><span id="parede-desvio">—</span></div>
+      </div>
+      <div class="cartao-categoria">
+        <h3>Laje</h3>
+        <div class="linha-valor"><span class="rotulo-linha">Estimado</span><span id="laje-estimado">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Gasto real</span><span id="laje-gasto">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Desvio</span><span id="laje-desvio">—</span></div>
+      </div>
+      <div class="cartao-categoria">
+        <h3>Pilar</h3>
+        <div class="linha-valor"><span class="rotulo-linha">Estimado</span><span id="pilar-estimado">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Gasto real</span><span id="pilar-gasto">—</span></div>
+        <div class="linha-valor"><span class="rotulo-linha">Desvio</span><span id="pilar-desvio">—</span></div>
+      </div>
+    </div>
+
+    <div class="cartao">
+      <h2>Gastos reais registrados</h2>
+      <table>
+        <thead>
+          <tr><th>Categoria</th><th>Valor</th><th>Data</th><th>Descrição</th><th>Ações</th></tr>
+        </thead>
+        <tbody id="corpo-tabela-gastos"></tbody>
+      </table>
+    </div>
+
+    <div class="cartao">
+      <h2>Registrar gasto</h2>
+      <form id="form-gasto" class="form-gasto">
+        <div>
+          <label>Categoria *</label>
+          <select id="g-categoria">
+            <option value="Parede">Parede</option>
+            <option value="Laje">Laje</option>
+            <option value="Pilar">Pilar</option>
+          </select>
+        </div>
+        <div>
+          <label>Valor (R$) *</label>
+          <input type="text" id="g-valor" placeholder="ex: 1500.00">
+        </div>
+        <div>
+          <label>Data</label>
+          <input type="date" id="g-data">
+        </div>
+        <div>
+          <label>Descrição</label>
+          <input type="text" id="g-descricao" placeholder="Ex: Compra de cimento e areia" maxlength="140">
+        </div>
+        <div class="acoes">
+          <button type="submit" class="botao botao-primario">Registrar gasto</button>
+        </div>
+      </form>
+      <div class="mensagem-erro-form" id="erro-form-gasto"></div>
+    </div>
+
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  function calcularSubtotais(lista) {
+    var subtotais = { Parede: 0, Laje: 0, Pilar: 0 };
+    lista.forEach(function (g) {
+      if (Object.prototype.hasOwnProperty.call(subtotais, g.categoria)) {
+        subtotais[g.categoria] += g.valor;
+      }
+    });
+    return subtotais;
+  }
+
+  function renderizarGastos(lista) {
+    var corpo = document.getElementById("corpo-tabela-gastos");
+    corpo.innerHTML = "";
+    lista.forEach(function (g) {
+      var linha = document.createElement("tr");
+      linha.innerHTML =
+        "<td>" + (g.categoria || "") + "</td>" +
+        "<td>" + fmtBRL(g.valor) + "</td>" +
+        "<td>" + fmtData(g.data) + "</td>" +
+        "<td>" + (g.descricao || "—") + "</td>" +
+        '<td class="celula-acao"></td>';
+
+      var botaoExcluir = document.createElement("button");
+      botaoExcluir.type = "button";
+      botaoExcluir.className = "botao-excluir";
+      botaoExcluir.textContent = "Excluir";
+      botaoExcluir.addEventListener("click", function () {
+        var confirmado = window.confirm(
+          "Excluir gasto de " + fmtBRL(g.valor) + " em " + (g.categoria || "") + "?"
+        );
+        if (!confirmado) return;
+
+        fetch("/gastos-reais/" + encodeURIComponent(g.id), { method: "DELETE" })
+          .then(function (resposta) {
+            if (!resposta.ok) throw new Error("HTTP " + resposta.status);
+            return resposta.json();
+          })
+          .then(function () {
+            return carregarTudo();
+          })
+          .catch(function (e) {
+            alert("Erro ao excluir: " + e.message);
+          });
+      });
+      linha.querySelector(".celula-acao").appendChild(botaoExcluir);
+
+      corpo.appendChild(linha);
+    });
+  }
+
+  // Mesma logica de custoDoItem() das outras 3 paginas -- le
+  // custo_calculado_rs (versao_schema 2, calculado em Python, nunca pela
+  // IA). Fallback pra arquivos anteriores a essa mudanca: decomposto tinha
+  // componentes_detalhados mas nao custo_calculado_rs; direto so tinha
+  // custo_estimado_rs (valor declarado pela IA, sem verificacao -- ver
+  // achado documentado no CLAUDE.md). Repetida aqui de proposito (paginas
+  // autocontidas, sem build step).
+  function custoDoItem(item) {
+    if (typeof item.custo_calculado_rs === "number") {
+      return item.custo_calculado_rs;
+    }
+    if (item.componentes_detalhados && item.componentes_detalhados.length) {
+      var total = 0;
+      item.componentes_detalhados.forEach(function (c) {
+        total += (c.preco_unitario_rs || 0) * (c.quantidade || 0);
+      });
+      return total;
+    }
+    return typeof item.custo_estimado_rs === "number" ? item.custo_estimado_rs : 0;
+  }
+
+  function calcularEstimadoPorCategoria(estimativa) {
+    var totais = { Parede: 0, Laje: 0, Pilar: 0 };
+    if (!estimativa) return totais;
+    (estimativa.estimativa_por_elemento || []).forEach(function (item) {
+      if (item.erro) return;
+      if (Object.prototype.hasOwnProperty.call(totais, item.categoria)) {
+        totais[item.categoria] += custoDoItem(item);
+      }
+    });
+    return totais;
+  }
+
+  function renderizarCartoesCategoria(estimativa, gastosReais) {
+    var estimadoPorCategoria = calcularEstimadoPorCategoria(estimativa);
+    var gastoPorCategoria = calcularSubtotais(gastosReais || []);
+
+    [
+      { categoria: "Parede", prefixo: "parede" },
+      { categoria: "Laje", prefixo: "laje" },
+      { categoria: "Pilar", prefixo: "pilar" },
+    ].forEach(function (info) {
+      var estimado = estimativa ? estimadoPorCategoria[info.categoria] : null;
+      var gasto = gastoPorCategoria[info.categoria];
+
+      document.getElementById(info.prefixo + "-estimado").textContent = estimado != null ? fmtBRL(estimado) : "—";
+      document.getElementById(info.prefixo + "-gasto").textContent = fmtBRL(gasto);
+
+      var elDesvio = document.getElementById(info.prefixo + "-desvio");
+      if (estimado) {
+        var desvioRs = gasto - estimado;
+        var desvioPercentual = (desvioRs / estimado) * 100;
+        var classe = desvioRs > 0 ? "valor-positivo" : desvioRs < 0 ? "valor-negativo" : "";
+        var sinal = desvioPercentual > 0 ? "+" : "";
+        elDesvio.innerHTML = '<span class="' + classe + '">' + fmtBRL(desvioRs) + " (" + sinal + fmtNum(desvioPercentual, 1) + "%)</span>";
+      } else {
+        elDesvio.textContent = "—";
+      }
+    });
+  }
+
+  function carregarGastos() {
+    return fetch("/gastos-reais").then(function (r) { return r.json(); });
+  }
+
+  function carregarEstimativa() {
+    return fetch("/estimativa/ultima").then(function (resposta) {
+      if (resposta.status === 404) return null;
+      if (!resposta.ok) throw new Error("Falha ao carregar estimativa (HTTP " + resposta.status + ")");
+      return resposta.json();
+    });
+  }
+
+  function carregarTudo() {
+    return Promise.all([carregarEstimativa(), carregarGastos()]).then(function (resultados) {
+      renderizarGastos(resultados[1]);
+      renderizarCartoesCategoria(resultados[0], resultados[1]);
+    });
+  }
+
+  // ---------- Formulario de gasto ----------
+
+  document.getElementById("form-gasto").addEventListener("submit", function (evento) {
+    evento.preventDefault();
+    var categoria = document.getElementById("g-categoria").value;
+    var valorTexto = document.getElementById("g-valor").value.trim();
+    var valorNumerico = lerValorBR(valorTexto);
+    var data = document.getElementById("g-data").value.trim();
+    var descricao = document.getElementById("g-descricao").value.trim();
+
+    var valorInvalido = valorTexto === "" || isNaN(valorNumerico) || valorNumerico <= 0;
+    document.getElementById("g-valor").classList.toggle("invalido", valorInvalido);
+
+    var mensagemErro = document.getElementById("erro-form-gasto");
+    if (valorInvalido) {
+      mensagemErro.textContent = "Informe um valor numérico maior que zero.";
+      return;
+    }
+    mensagemErro.textContent = "";
+
+    fetch("/gastos-reais", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        categoria: categoria,
+        valor: valorNumerico,
+        data: data || null,
+        descricao: descricao || null,
+      }),
+    })
+      .then(function (resposta) {
+        if (!resposta.ok) throw new Error("HTTP " + resposta.status);
+        return resposta.json();
+      })
+      .then(function () {
+        document.getElementById("form-gasto").reset();
+        return carregarTudo();
+      })
+      .catch(function (e) {
+        mensagemErro.textContent = "Erro ao registrar: " + e.message;
+      });
+  });
+
+  // ---------- Inicializacao ----------
+
+  carregarTudo()
+    .catch(function (e) {
+      console.error(e);
+    })
+    .finally(function () {
+      document.getElementById("carregando-inicial").style.display = "none";
+      document.getElementById("conteudo").style.display = "block";
+    });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+[
+  {
+    "material_estrutural": null,
+    "codigo_sinapi": "103335",
+    "preco_confirmado": 1000.0,
+    "data": "2026-09-12",
+    "id": "23085967-80bc-4947-b719-e54435bfaa16"
+  },
+  {
+    "material_estrutural": null,
+    "codigo_sinapi": "103335",
+    "preco_confirmado": 10000.0,
+    "data": "2026-09-12",
+    "id": "4cc711f8-89a1-4f28-9de0-c13109245a16"
+  }
+]

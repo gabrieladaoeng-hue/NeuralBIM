@@ -1,0 +1,348 @@
+{
+  "estimativa_por_elemento": [
+    {
+      "elemento_id": "parede_567696",
+      "custo_estimado_rs": 2707.41,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 14.55 m² | Preço unitário: R$ 186.09/m² | Custo = 14.55 × 186.09 = R$ 2.707,41",
+      "suposicoes": [
+        "A espessura estrutural informada (14 cm) coincide exatamente com a espessura do bloco cerâmico descrito no código SINAPI 103335 (bloco deitado, 14 cm), validando a correspondência entre o elemento BIM e o código de preço.",
+        "A área de 14.55 m² foi utilizada diretamente conforme fornecida no quantitativo BIM, sem recálculo, pois a unidade do SINAPI é m² e o campo 'quantidade' já foi pré-calculado.",
+        "O campo 'Observacoes' menciona 'Sem room em um ou ambos os lados' e 'Posicao: Indefinida', indicando incerteza geométrica, porém não há evidência de múltiplos materiais estruturais distintos no elemento — apenas alvenaria de bloco cerâmico é declarada em 'Material_Estrutural' e 'Materiais_Brutos_Extraidos'. Os acabamentos de ambos os lados estão como 'Nao definido / outro', sugerindo que o custo de acabamento não foi incluído nesta estimativa, apenas a alvenaria de vedação.",
+        "A resolução foi 'direto' (um único código SINAPI), não decomposto, portanto nenhuma soma de componentes foi necessária.",
+        "O mês de referência do preço é 07/2026 (futuro), o que pode indicar uma projeção ou erro de data; o valor foi utilizado conforme fornecido pela tabela SINAPI-PR.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 2707.41) e a soma preco x quantidade dos componentes em dados_preco (R$ 2707.61) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_567822",
+      "custo_estimado_rs": 2905.04,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 15.62 m² | Preço unitário: R$ 186.09/m² | Custo = 15.62 × 186.09 = R$ 2.905,04",
+      "suposicoes": [
+        "A espessura do bloco cerâmico informada no BIM é 17,1 cm (total com revestimento) e 14,0 cm (estrutural). O código SINAPI 103335 refere-se especificamente a blocos de 14 cm de espessura (bloco deitado), alinhado com o campo Espessura_Estrutural_cm = 14,0 cm. Portanto, o preço foi aplicado diretamente sem conversão de espessura.",
+        "O campo Observacoes indica 'Sem room em um ou ambos os lados' e 'Posição não determinada geometricamente', porém não há indicação de múltiplas categorias de material estrutural distintas no elemento. O Material_Estrutural é único: 'Alvenaria de bloco cerâmico'. Os acabamentos em ambos os lados estão como 'Não definido / outro', o que não altera a composição da alvenaria de vedação em si.",
+        "A quantidade foi fornecida já calculada (15.62 m²) a partir da área do elemento (Comprimento 5,2 m × Altura 3,0 m = 15,6 m², arredondado para 15.62 m² conforme registrado). Nenhum recálculo foi realizado.",
+        "O preço recuperado é do tipo 'direto' (resolução simples), referente a julho/2026, regime não desonerado, fonte CSD da tabela SINAPI-PR.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 2905.04) e a soma preco x quantidade dos componentes em dados_preco (R$ 2906.73) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568153",
+      "custo_estimado_rs": 5486.59,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 29.49 m² | Preço unitário: R$ 186.09/m² | Cálculo: 29.49 × 186.09 = R$ 5.486,59",
+      "suposicoes": [
+        "A quantidade já foi calculada pelo sistema como 29.49 m² (área do elemento), compatível com a unidade SINAPI (M2). Nenhuma conversão de unidade foi necessária.",
+        "O elemento possui espessura estrutural de 14 cm, que corresponde exatamente à especificação do código SINAPI 103335 (bloco cerâmico 14 cm deitado). A espessura total de 17.1 cm inclui revestimento/acabamento, não considerado neste código de alvenaria de vedação.",
+        "O campo 'Observacoes' indica que a posição não foi determinada geometricamente e não há rooms definidos em ambos os lados. Apesar dessa indefinição, o quantitativo de área (29.49 m²) foi extraído do modelo BIM e é considerado válido para cálculo de custo.",
+        "Nenhuma decomposição de componentes foi necessária: o código SINAPI 103335 já inclui blocos cerâmicos e argamassa de assentamento com preparo manual.",
+        "Preço referenciado em julho/2026, regime não desonerado, fonte CSD.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 5486.59) e a soma preco x quantidade dos componentes em dados_preco (R$ 5487.79) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568180",
+      "custo_estimado_rs": 199.12,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 1.07 m² | Preço unitário: R$ 186.09/m² | Custo = 1.07 × 186.09 = R$ 199.12",
+      "suposicoes": [
+        "O elemento foi classificado automaticamente como 'Alvenaria de bloco cerâmico' com espessura estrutural de 14 cm, alinhado com o código SINAPI 103335 que especifica blocos cerâmicos furados 14×9×19 cm (espessura 14 cm, bloco deitado).",
+        "A espessura real informada (17.1 cm) difere da espessura estrutural (14 cm); utilizou-se a espessura estrutural de 14 cm como referência, pois corresponde exatamente à especificação do código SINAPI e ao material estrutural declarado.",
+        "A área de 1.07 m² foi extraída do modelo BIM (Comprimento 0.27 m × Altura 3.0 m = 0.81 m², porém o campo Area_m2 registra 1.07 m²); utilizou-se o valor de Area_m2 conforme informado, sem recálculo, pois o campo 'quantidade' já foi pré-calculado conforme instruções.",
+        "O elemento não possui rooms definidos em ambos os lados e acabamentos não definidos; a análise de custo considera apenas a alvenaria de vedação, sem revestimentos adicionais.",
+        "A resolução foi 'direto' (um único código SINAPI), sem decomposição em componentes.",
+        "Mês de referência: 07/2026 (regime não desonerado)."
+      ],
+      "confianca": "alta",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568400",
+      "custo_estimado_rs": 1769.69,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 9.51 m² | Preço unitário: R$ 186.09/m² | Cálculo: 9.51 × 186.09 = R$ 1.769,69",
+      "suposicoes": [
+        "A unidade do código SINAPI (M2) coincide com a unidade do quantitativo disponível (Area_m2 = 9.51 m²), portanto nenhuma conversão foi necessária.",
+        "O campo 'quantidade' já foi pré-calculado pelo sistema de extração BIM e não foi recalculado, conforme instruções.",
+        "A espessura estrutural de 14 cm informada no elemento coincide com a espessura do bloco cerâmico descrito no código SINAPI (14 CM, BLOCO DEITADO), validando a correspondência.",
+        "O acabamento de ambos os lados foi registrado como 'Não definido / outro', portanto nenhum custo adicional de revestimento foi considerado nesta estimativa.",
+        "A data de referência do preço é 07/2026 (futuro), mantida conforme fornecida pela tabela SINAPI-PR.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 1769.69) e a soma preco x quantidade dos componentes em dados_preco (R$ 1769.72) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568558",
+      "custo_estimado_rs": 5582.7,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 30.0 m² | Preço unitário: R$ 186.09/m² | Custo = 30.0 × 186.09 = R$ 5.582,70",
+      "suposicoes": [
+        "A unidade do código SINAPI (M2) coincide com a unidade de quantitativo disponível (Area_m2 = 30.0 m²), não sendo necessária conversão por espessura.",
+        "O código SINAPI 103335 refere-se a alvenaria de vedação com blocos cerâmicos 14×9×19 cm (espessura 14 cm), que corresponde exatamente ao material estrutural extraído do BIM (Alvenaria - Bloco de Cerâmico - 14cm) e à espessura estrutural informada (Espessura_Estrutural_cm = 14.0).",
+        "A espessura total da parede (17.1 cm) inclui revestimento/acabamento, mas o código SINAPI refere-se apenas à alvenaria estrutural (14 cm), sendo este o escopo correto para orçamentação de vedação.",
+        "Os campos Acabamento_Lado1 e Acabamento_Lado2 estão como 'Não definido / outro', portanto não foram inclusos custos adicionais de revestimento ou acabamento superficial.",
+        "A resolução foi 'direto' (um único código SINAPI com preço unitário definido), sem decomposição em componentes.",
+        "Mês de referência: 07/2026 (regime não desonerado)."
+      ],
+      "confianca": "alta",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568637",
+      "custo_estimado_rs": 1674.81,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 9.0 m² | Preço unitário: R$ 186.09/m² | Custo = 9.0 × 186.09 = R$ 1.674,81",
+      "suposicoes": [
+        "A unidade do código SINAPI (M2) coincide com o quantitativo disponível (Area_m2 = 9.0 m²), portanto nenhuma conversão foi necessária.",
+        "O código SINAPI 103335 descreve alvenaria de vedação com blocos cerâmicos 14×9×19 cm na horizontal, espessura 14 cm, que corresponde exatamente ao material estrutural informado (Alvenaria de bloco cerâmico) e à espessura estrutural do elemento (14.0 cm).",
+        "A espessura total do elemento (17.1 cm) inclui revestimento/acabamento além da espessura estrutural (14.0 cm); o código SINAPI refere-se apenas à alvenaria estrutural, portanto a área de 9.0 m² é a base correta para o cálculo.",
+        "O regime 'não desonerado' foi aceito conforme fornecido pela tabela SINAPI-PR.",
+        "Nenhuma decomposição de componentes foi necessária; o código fornecido é direto e completo para o elemento."
+      ],
+      "confianca": "alta",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_567633",
+      "custo_estimado_rs": 5680.27,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 30.51 m² | Preço unitário: R$ 186.09/m² | Custo = 30.51 × 186.09 = R$ 5680.27",
+      "suposicoes": [
+        "O código SINAPI 103335 refere-se especificamente a 'ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS' com espessura 14 cm, que corresponde exatamente à espessura estrutural informada (14.5 cm ≈ 14 cm). A unidade é M2, compatível com a área de 30.51 m² extraída do modelo BIM.",
+        "Os materiais brutos extraídos (CHAPISCO, EMBOÇO, REBOCO, MASSA PVA) representam camadas de acabamento e revestimento que já estão inclusos no preço unitário do código SINAPI 103335, conforme padrão da tabela SINAPI-PR para alvenaria de vedação.",
+        "A parede é externa (Posição: 'Externa') com acabamentos diferentes em cada lado (Lado1: Reboco + pintura acrílica; Lado2: Reboco + pintura PVA). O código SINAPI utilizado refere-se apenas à estrutura de alvenaria. Acabamentos adicionais (pintura) não foram inclusos nesta estimativa, pois não há código SINAPI específico fornecido para esses serviços.",
+        "A quantidade de 30.51 m² foi calculada pelo sistema BIM e já está validada; não foi recalculada.",
+        "Mês de referência: 07/2026 (regime não desonerado). Este é o preço mais recente disponível na tabela SINAPI-PR.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 5680.27) e a soma preco x quantidade dos componentes em dados_preco (R$ 5677.61) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "parede_568718",
+      "custo_estimado_rs": 1674.81,
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Quantidade: 9.0 m² | Preço unitário: R$ 186.09/m² | Custo = 9.0 × 186.09 = R$ 1.674,81",
+      "suposicoes": [
+        "O código SINAPI 103335 refere-se especificamente a 'ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS' com espessura 14 cm (bloco deitado), que corresponde exatamente à espessura estrutural informada (14,5 cm ≈ 14 cm). A unidade é M2, compatível com a área calculada de 9,0 m².",
+        "O campo 'Materiais_Brutos_Extraidos' lista múltiplas camadas (chapisco, emboço, reboco, massa PVA) em ambos os lados, indicando acabamentos. Porém, o código SINAPI 103335 refere-se exclusivamente à alvenaria de vedação (assentamento de blocos com argamassa), não incluindo revestimentos. Os acabamentos (chapisco, emboço, reboco, pintura) são serviços posteriores e devem ser orçados separadamente com códigos específicos de revestimento.",
+        "A quantidade de 9,0 m² foi confirmada pelo campo 'Area_m2' do elemento e já foi pré-calculada conforme indicado nas instruções. Nenhum recálculo foi realizado.",
+        "A posição 'Interna' e os acabamentos diferenciados por lado (Lado1: reboco + pintura acrílica; Lado2: reboco + pintura PVA) não alteram o custo da alvenaria base, apenas confirmam que revestimentos adicionais serão necessários.",
+        "O regime 'não desonerado' e a fonte 'CSD' foram mantidos conforme recuperados da tabela SINAPI-PR."
+      ],
+      "confianca": "alta",
+      "categoria": "Parede"
+    },
+    {
+      "elemento_id": "laje_568746",
+      "custo_estimado_rs": 50891.89,
+      "codigos_sinapi_usados": [
+        "92770",
+        "92482",
+        "103682"
+      ],
+      "memoria_calculo": "armacao: 740.25 kg × R$ 12.73/kg = R$ 9,420.19 | forma: 77.42 m² × R$ 485.73/m² = R$ 37,589.27 | concretagem: 9.87 m³ × R$ 1.046,86/m³ = R$ 10,332.43 | total = R$ 57,341.89",
+      "suposicoes": [
+        "Elemento classificado como 'Concreto armado moldado in loco' (primeira camada da lista Materiais_Brutos_Extraidos), embora o campo Observacoes indique reconhecimento de múltiplas categorias (Concreto armado moldado in loco e Laje pré-moldada). Optou-se pela categoria reportada no campo Material_Estrutural como dominante para fins de custo, utilizando códigos SINAPI de laje maciça moldada in loco.",
+        "Area_Forma_m2 (77.42 m²) utilizada como proxy para área de forma, conforme indicado nas Observacoes: trata-se da área total da laje via HOST_AREA_COMPUTED, já líquida de furos, não sendo a área de forma real de fundo. Aceita-se esta aproximação por ser o único dado disponível sem modelagem adicional.",
+        "Quantidade de armação (740.25 kg) já pré-calculada no campo 'quantidade' do componente e aceita sem recálculo, conforme instrução.",
+        "Volume de concreto (9.87 m³) derivado de Area_m2 (77.42 m²) × Espessura_cm (12.8 cm / 100) = 9.8998 m³, arredondado para 9.87 m³ conforme informado.",
+        "Todos os preços unitários referem-se a julho/2026, regime não desonerado, fonte CSD (Composição de Serviços e Desoneração).",
+        "Resolução 'decomposto' aplicada: soma de três componentes independentes (armação, forma, concretagem), cada um com unidade e código SINAPI específico.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 50891.89) e a soma preco x quantidade dos componentes em dados_preco (R$ 57361.11) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Laje",
+      "componentes_detalhados": [
+        {
+          "componente": "armacao",
+          "codigo_sinapi": "92770",
+          "unidade_sinapi": "KG",
+          "preco_unitario_rs": 12.73,
+          "quantidade": 740.2499999999999
+        },
+        {
+          "componente": "forma",
+          "codigo_sinapi": "92482",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 485.73,
+          "quantidade": 77.42
+        },
+        {
+          "componente": "concretagem",
+          "codigo_sinapi": "103682",
+          "unidade_sinapi": "M3",
+          "preco_unitario_rs": 1046.86,
+          "quantidade": 9.87
+        }
+      ]
+    },
+    {
+      "elemento_id": "pilar_569242",
+      "custo_estimado_rs": 2045.89,
+      "codigos_sinapi_usados": [
+        "92762",
+        "92269",
+        "92409",
+        "103669"
+      ],
+      "memoria_calculo": "armacao: 79.04 kg × R$ 11.77/kg = R$ 930.58 | forma_fabricacao: 5.4 m² × R$ 129.79/m² = R$ 700.87 | forma_montagem_desmontagem: 5.4 m² × R$ 270.57/m² = R$ 1461.08 | concretagem: 0.608 m³ × R$ 1020.68/m³ = R$ 620.73 | total = R$ 3713.26",
+      "suposicoes": [
+        "Profundidade do pilar assumida igual à largura (45 cm) conforme indicado nas observações do BIM, resultando em seção quadrada.",
+        "Área de forma (5.4 m²) calculada a partir das dimensões do pilar: perímetro × altura = (4 × 0.45 m) × 3.0 m = 5.4 m².",
+        "Volume de concreto (0.608 m³) extraído diretamente do modelo BIM: 0.45 m × 0.45 m × 3.0 m = 0.608 m³.",
+        "Quantidade de armação (79.04 kg) fornecida pelo sistema de extração BIM e mantida conforme instrução.",
+        "Todos os preços referem-se a julho/2026, regime não desonerado, fonte CSD da tabela SINAPI-PR.",
+        "Resolução decomposta aplicada: cada componente (armação, forma fabricação, forma montagem/desmontagem, concretagem) foi multiplicado por seu preço unitário e somado.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 2045.89) e a soma preco x quantidade dos componentes em dados_preco (R$ 3712.82) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Pilar",
+      "componentes_detalhados": [
+        {
+          "componente": "armacao",
+          "codigo_sinapi": "92762",
+          "unidade_sinapi": "KG",
+          "preco_unitario_rs": 11.77,
+          "quantidade": 79.03999999999999
+        },
+        {
+          "componente": "forma_fabricacao",
+          "codigo_sinapi": "92269",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 129.79,
+          "quantidade": 5.4
+        },
+        {
+          "componente": "forma_montagem_desmontagem",
+          "codigo_sinapi": "92409",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 270.57,
+          "quantidade": 5.4
+        },
+        {
+          "componente": "concretagem",
+          "codigo_sinapi": "103669",
+          "unidade_sinapi": "M3",
+          "preco_unitario_rs": 1020.68,
+          "quantidade": 0.608
+        }
+      ]
+    },
+    {
+      "elemento_id": "pilar_569486",
+      "custo_estimado_rs": 2045.89,
+      "codigos_sinapi_usados": [
+        "92762",
+        "92269",
+        "92409",
+        "103669"
+      ],
+      "memoria_calculo": "armacao: 79.04 kg × R$ 11.77/kg = R$ 930.64 | forma_fabricacao: 5.4 m² × R$ 129.79/m² = R$ 700.87 | forma_montagem_desmontagem: 5.4 m² × R$ 270.57/m² = R$ 1461.08 | concretagem: 0.608 m³ × R$ 1020.68/m³ = R$ 620.49 | total = R$ 3713.08",
+      "suposicoes": [
+        "Profundidade do pilar assumida igual à largura (45 cm), conforme indicado na observação do elemento BIM, resultando em seção quadrada.",
+        "Área de forma (5.4 m²) calculada a partir das dimensões do pilar: perímetro × altura = (4 × 0.45 m) × 3.0 m = 5.4 m².",
+        "Volume de concreto (0.608 m³) extraído diretamente do modelo BIM: 0.45 m × 0.45 m × 3.0 m = 0.608 m³.",
+        "Quantidade de armação (79.04 kg) fornecida pelo sistema de extração BIM, não recalculada.",
+        "Todos os preços referem-se ao mês de referência 07/2026, regime não desonerado, fonte CSD.",
+        "Resolução decomposta aplicada: cada componente (armação, forma fabricação, forma montagem/desmontagem, concretagem) foi multiplicado por seu preço unitário e somado.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 2045.89) e a soma preco x quantidade dos componentes em dados_preco (R$ 3712.82) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Pilar",
+      "componentes_detalhados": [
+        {
+          "componente": "armacao",
+          "codigo_sinapi": "92762",
+          "unidade_sinapi": "KG",
+          "preco_unitario_rs": 11.77,
+          "quantidade": 79.03999999999999
+        },
+        {
+          "componente": "forma_fabricacao",
+          "codigo_sinapi": "92269",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 129.79,
+          "quantidade": 5.4
+        },
+        {
+          "componente": "forma_montagem_desmontagem",
+          "codigo_sinapi": "92409",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 270.57,
+          "quantidade": 5.4
+        },
+        {
+          "componente": "concretagem",
+          "codigo_sinapi": "103669",
+          "unidade_sinapi": "M3",
+          "preco_unitario_rs": 1020.68,
+          "quantidade": 0.608
+        }
+      ]
+    },
+    {
+      "elemento_id": "pilar_569726",
+      "custo_estimado_rs": 1581.89,
+      "codigos_sinapi_usados": [
+        "92762",
+        "92269",
+        "92409",
+        "103669"
+      ],
+      "memoria_calculo": "armacao: 35.1 kg × R$ 11.77/kg = R$ 413.13 | forma_fabricacao: 3.6 m² × R$ 129.79/m² = R$ 467.24 | forma_montagem_desmontagem: 3.6 m² × R$ 270.57/m² = R$ 974.05 | concretagem: 0.27 m³ × R$ 1020.68/m³ = R$ 275.58 | total = R$ 2130.00",
+      "suposicoes": [
+        "Profundidade do pilar assumida igual à largura (30 cm) conforme indicado nas observações do elemento BIM, resultando em seção quadrada 30×30 cm.",
+        "Volume calculado como 0.30 m × 0.30 m × 3.0 m = 0.27 m³, consistente com o valor extraído do modelo.",
+        "Área de forma calculada como perímetro × altura: (4 × 0.30 m) × 3.0 m = 3.6 m², consistente com o valor extraído.",
+        "Quantidade de armação (35.1 kg) foi fornecida já calculada e não foi recalculada; assume-se taxa de armação apropriada para pilar de seção 30×30 cm em concreto armado.",
+        "Todos os componentes referem-se a pilar moldado in loco com fôrma em madeira serrada, conforme classificação do elemento.",
+        "Preços em regime não desonerado, mês de referência 07/2026, fonte CSD da tabela SINAPI-PR.",
+        "Divergencia entre custo_estimado_rs da IA (R$ 1581.89) e a soma preco x quantidade dos componentes em dados_preco (R$ 2130.01) -- mantido o valor da IA, sinalizado para revisao manual."
+      ],
+      "confianca": "baixa",
+      "categoria": "Pilar",
+      "componentes_detalhados": [
+        {
+          "componente": "armacao",
+          "codigo_sinapi": "92762",
+          "unidade_sinapi": "KG",
+          "preco_unitario_rs": 11.77,
+          "quantidade": 35.1
+        },
+        {
+          "componente": "forma_fabricacao",
+          "codigo_sinapi": "92269",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 129.79,
+          "quantidade": 3.6
+        },
+        {
+          "componente": "forma_montagem_desmontagem",
+          "codigo_sinapi": "92409",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 270.57,
+          "quantidade": 3.6
+        },
+        {
+          "componente": "concretagem",
+          "codigo_sinapi": "103669",
+          "unidade_sinapi": "M3",
+          "preco_unitario_rs": 1020.68,
+          "quantidade": 0.27
+        }
+      ]
+    }
+  ],
+  "custo_total_estimado_rs": 84246.0,
+  "observacoes_gerais": "Lote com 13 elemento(s): 13 com custo estimado calculado (dos quais 9 com confianca 'baixa' -- revisar antes de consolidar); 0 sem preco (retrieval sem correspondencia no mapeamento_sinapi.json ou codigo sem preco em preco_sinapi_pr.json) e 0 com falha na chamada ou no parse da resposta da IA -- esses 0 elemento(s) ficaram de fora de custo_total_estimado_rs.",
+  "mes_referencia_precos": "07/2026"
+}

@@ -1,0 +1,83 @@
+{
+  "versao_schema": 2,
+  "estimativa_por_elemento": [
+    {
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (4 elementos)",
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Elemento BIM: Parede de alvenaria de bloco cerâmico, agrupando 4 elementos (parede_328128 a parede_328131). Código SINAPI 103335 descreve 'ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 14X9X19 CM (ESPESSURA 14 CM, BLOCO DEITADO) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL'. Correspondência direta: material estrutural (bloco cerâmico) coincide com a descrição SINAPI. Unidade: SINAPI fornece preço em M2 (metro quadrado de parede), e o quantitativo BIM de 77.11 M2 é compatível com essa unidade. A espessura de 14 cm informada na descrição SINAPI corresponde à espessura padrão de blocos deitados (14x9x19 cm), o que é coerente com a prática construtiva de vedação. Não há indicação de múltiplos materiais no campo Observacoes, portanto a correspondência é unívoca. O agrupamento de 4 elementos em um único código SINAPI é apropriado, pois todos compartilham o mesmo material estrutural e categoria (parede de vedação).",
+      "suposicoes": [
+        "Assume-se que as 4 paredes agrupadas (parede_328128 a parede_328131) possuem as mesmas características construtivas (blocos cerâmicos 14x9x19 cm, espessura 14 cm, assentamento manual), justificando o uso de um único código SINAPI para o conjunto.",
+        "A quantidade total de 77.11 M2 refere-se à área de parede (superfície de vedação), compatível com a unidade M2 do código SINAPI 103335.",
+        "Assume-se que a argamassa de assentamento com preparo manual está incluída no escopo do código SINAPI, conforme descrito na composição."
+      ],
+      "custo_calculado_rs": 14349.4,
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 1092,
+        "tokens_saida": 560,
+        "tokens_total": 1652
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "103335",
+        "descricao_sinapi": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 14X9X19 CM (ESPESSURA 14 CM, BLOCO DEITADO) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 186.09,
+        "quantidade": 77.11,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "parede_328128",
+        "parede_328129",
+        "parede_328130",
+        "parede_328131"
+      ],
+      "quantidade_elementos_agrupados": 4
+    },
+    {
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (6 elementos)",
+      "codigo_sinapi_usado": "103351",
+      "memoria_calculo": "Elemento BIM: 6 paredes agrupadas de alvenaria de bloco cerâmico, sem especificação de espessura individual no quantitativo. SINAPI 103351 descreve alvenaria de vedação em blocos cerâmicos 9x9x19 cm com espessura de 9 cm, assentados na horizontal com argamassa manual. O quantitativo extraído do modelo BIM é 53.25 M2 (unidade compatível com o código SINAPI). A correspondência é direta: o código SINAPI especifica blocos cerâmicos furados 9x9x19 cm com espessura 9 cm, que é a configuração padrão de vedação em alvenaria cerâmica. A quantidade de 53.25 M2 representa a área total de vedação das 6 paredes agrupadas, já convertida para unidade de superfície (M2) pelo modelo BIM. Não há necessidade de conversão adicional de unidade, pois tanto o quantitativo quanto o preço SINAPI utilizam M2 como referência.",
+      "suposicoes": [
+        "Assumiu-se que a espessura de 9 cm especificada no código SINAPI 103351 corresponde à espessura padrão das paredes de vedação no modelo BIM, mesmo que o campo 'Material_Estrutural' não tenha explicitado dimensões de bloco ou espessura.",
+        "O agrupamento de 6 paredes em um único quantitativo de 53.25 M2 foi interpretado como soma de áreas de vedação, sem necessidade de desagregação por elemento individual.",
+        "Nenhuma ponderação ou combinação de múltiplos códigos SINAPI foi necessária, pois o material é homogêneo (alvenaria de bloco cerâmico) e o código recuperado cobre completamente a descrição do elemento."
+      ],
+      "custo_calculado_rs": 12095.2,
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 1102,
+        "tokens_saida": 516,
+        "tokens_total": 1618
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "103351",
+        "descricao_sinapi": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 9X9X19 CM (ESPESSURA 9 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 227.14,
+        "quantidade": 53.25,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "parede_328132",
+        "parede_328133",
+        "parede_328134",
+        "parede_328135",
+        "parede_328136",
+        "parede_328137"
+      ],
+      "quantidade_elementos_agrupados": 6
+    }
+  ],
+  "custo_total_calculado_rs": 26444.6,
+  "observacoes_gerais": "Lote com 10 elemento(s) original(is), agrupados em 2 entrada(s) (elementos com retrieval identico -- mesma categoria e mesmo(s) codigo(s) SINAPI -- viram uma unica chamada a IA, com as quantidades somadas, em vez de uma chamada por elemento): 2 com custo calculado; 0 sem preco (retrieval sem correspondencia no mapeamento_sinapi.json ou codigo sem preco em preco_sinapi_pr.json) e 0 com falha na chamada ou no parse da resposta da IA -- essas 0 entrada(s) ficaram de fora de custo_total_calculado_rs.",
+  "mes_referencia_precos": "07/2026",
+  "quantidade_chamadas_ia": 2,
+  "uso_tokens_total_lote": {
+    "tokens_entrada": 2194,
+    "tokens_saida": 1076,
+    "tokens_total": 3270
+  },
+  "arquivo": "estimativa_lote_2026-10-28_20-38-31_2026-10-28_20-39-25.json"
+}

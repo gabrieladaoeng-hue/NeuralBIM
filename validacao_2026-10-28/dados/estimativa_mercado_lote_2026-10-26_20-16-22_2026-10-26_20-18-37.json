@@ -1,0 +1,229 @@
+{
+  "versao_schema": 2,
+  "modo": "mercado_ia",
+  "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+  "rotulo_interface": "Estimativa sem base oficial (conhecimento do modelo)",
+  "estimativa_por_elemento": [
+    {
+      "preco_unitario_minimo_rs": 85.0,
+      "preco_unitario_provavel_rs": 120.0,
+      "preco_unitario_maximo_rs": 160.0,
+      "unidade": "M2",
+      "premissas": [
+        "Inclui material (blocos cerâmicos 14cm) e mão de obra completa",
+        "Assentamento com argamassa convencional (cimento, areia, cal)",
+        "Parede simples, sem revestimento ou acabamento",
+        "Condições normais de obra, sem dificuldades de acesso",
+        "Blocos cerâmicos estruturais ou vedação de qualidade padrão",
+        "Preços referentes ao mercado do Paraná em 2024",
+        "Não inclui revestimento, pintura ou impermeabilização"
+      ],
+      "limitacoes": [
+        "Variação regional dentro do Paraná pode ser significativa (capital vs interior)",
+        "Preço sensível a flutuações de custo de material e mão de obra",
+        "Não considera possíveis dificuldades de acesso ou andaimes especiais",
+        "Faixa ampla reflete incerteza sobre padrão de qualidade e produtividade local",
+        "Não inclui desperdício ou retrabalho"
+      ],
+      "confianca_declarada": "media",
+      "custo_minimo_rs": 6554.35,
+      "custo_provavel_rs": 9253.2,
+      "custo_maximo_rs": 12337.6,
+      "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 546,
+        "tokens_saida": 372,
+        "tokens_total": 918
+      },
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (4 elementos)",
+      "elementos_originais": [
+        "parede_328128",
+        "parede_328129",
+        "parede_328130",
+        "parede_328131"
+      ],
+      "quantidade_elementos_agrupados": 4,
+      "quantidade": 77.11
+    },
+    {
+      "preco_unitario_minimo_rs": 45.0,
+      "preco_unitario_provavel_rs": 65.0,
+      "preco_unitario_maximo_rs": 90.0,
+      "unidade": "M2",
+      "premissas": [
+        "Bloco cerâmico de 9 cm de espessura (meia vez)",
+        "Incluso material (blocos, argamassa, cal) e mão de obra completa",
+        "Alvenaria simples, sem revestimento",
+        "Condições normais de obra, sem dificuldades de acesso",
+        "Preços praticados em Paraná em 2024",
+        "Blocos de qualidade padrão, não estrutural",
+        "Argamassa convencional (cimento, areia, cal)"
+      ],
+      "limitacoes": [
+        "Preço pode variar significativamente conforme localidade dentro do Paraná (Curitiba vs interior)",
+        "Variação sazonal de preços de materiais não capturada",
+        "Não incluso revestimento (chapisco, reboco, emboço)",
+        "Não incluso estrutura de concreto ou vergas",
+        "Produtividade da mão de obra pode variar com complexidade da parede",
+        "Preços de blocos cerâmicos sofrem flutuação conforme fornecedor local"
+      ],
+      "confianca_declarada": "media",
+      "custo_minimo_rs": 2396.25,
+      "custo_provavel_rs": 3461.25,
+      "custo_maximo_rs": 4792.5,
+      "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 546,
+        "tokens_saida": 386,
+        "tokens_total": 932
+      },
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (6 elementos)",
+      "elementos_originais": [
+        "parede_328132",
+        "parede_328133",
+        "parede_328134",
+        "parede_328135",
+        "parede_328136",
+        "parede_328137"
+      ],
+      "quantidade_elementos_agrupados": 6,
+      "quantidade": 53.25
+    },
+    {
+      "preco_unitario_minimo_rs": 45.0,
+      "preco_unitario_provavel_rs": 75.0,
+      "preco_unitario_maximo_rs": 120.0,
+      "unidade": "M2",
+      "premissas": [
+        "Piso sobre solo inclui: compactação do terreno, brita/base, concreto usinado FCK 20 MPa com espessura 10 cm, acabamento desempenado",
+        "Incluso material e mão de obra completa",
+        "Terreno com acesso adequado e sem impedimentos especiais",
+        "Obra em região metropolitana ou urbana do Paraná (Curitiba, Londrina, Maringá)",
+        "Sem reforço estrutural especial ou armadura adicional",
+        "Condições normais de execução, sem urgência ou mobilização especial"
+      ],
+      "limitacoes": [
+        "Variação significativa conforme preparo do solo (se há limpeza, remoção de raízes, drenagem)",
+        "Preço sensível a distância de fornecimento de concreto e brita",
+        "Não incluso possíveis impermeabilizações ou tratamentos especiais",
+        "Custo de mão de obra pode variar bastante entre pequenas e grandes obras",
+        "Não contempla reforço com tela ou armadura, que aumentaria o custo",
+        "Região Paraná tem variação interna significativa (interior vs. capital)"
+      ],
+      "confianca_declarada": "media",
+      "custo_minimo_rs": 2934.0,
+      "custo_provavel_rs": 4890.0,
+      "custo_maximo_rs": 7824.0,
+      "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+      "categoria": "Laje",
+      "uso_tokens": {
+        "tokens_entrada": 528,
+        "tokens_saida": 408,
+        "tokens_total": 936
+      },
+      "elemento_id": "Laje - Piso sobre solo (1 elemento)",
+      "elementos_originais": [
+        "laje_328140"
+      ],
+      "quantidade_elementos_agrupados": 1,
+      "quantidade": 65.2
+    },
+    {
+      "preco_unitario_minimo_rs": 85.0,
+      "preco_unitario_provavel_rs": 120.0,
+      "preco_unitario_maximo_rs": 160.0,
+      "unidade": "M2",
+      "premissas": [
+        "Laje pré-moldada trelicada tipo nervurada, vão típico de 4 a 6 metros",
+        "Incluso material (laje pré-moldada) e mão de obra de assentamento",
+        "Não incluso estrutura de apoio (vigas), escoramento temporário ou acabamentos finais",
+        "Preço praticado em região metropolitana do Paraná (Curitiba/arredores) ou cidades médias",
+        "Obra de médio porte com acesso adequado e logística normal",
+        "Espessura padrão de 12 a 16 cm com enchimento de concreto in loco"
+      ],
+      "limitacoes": [
+        "Variação significativa conforme fornecedor local, distância de transporte e demanda regional",
+        "Preço pode ser menor em grandes volumes ou maior em obras de difícil acesso",
+        "Não consideradas variações de vãos muito grandes (>8m) ou geometrias complexas",
+        "Custos de escoramento e retirada de formas não quantificados separadamente",
+        "Mercado do Paraná tem fornecedores regionais com preços heterogêneos"
+      ],
+      "confianca_declarada": "media",
+      "custo_minimo_rs": 5542.0,
+      "custo_provavel_rs": 7824.0,
+      "custo_maximo_rs": 10432.0,
+      "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+      "categoria": "Laje",
+      "uso_tokens": {
+        "tokens_entrada": 541,
+        "tokens_saida": 406,
+        "tokens_total": 947
+      },
+      "elemento_id": "Laje - Laje pre-moldada trelicada (cobertura/forro) (1 elemento)",
+      "elementos_originais": [
+        "laje_328147"
+      ],
+      "quantidade_elementos_agrupados": 1,
+      "quantidade": 65.2
+    },
+    {
+      "preco_unitario_minimo_rs": 1200.0,
+      "preco_unitario_provavel_rs": 1600.0,
+      "preco_unitario_maximo_rs": 2200.0,
+      "unidade": "M3",
+      "premissas": [
+        "Concreto usinado (bombeado ou lançado por grua) com fck 25 MPa ou 30 MPa",
+        "Incluso material (concreto, aço CA-50, formas, escoramento) e mão de obra completa (carpintaria, armação, lançamento, adensamento, cura)",
+        "Pilares de seção média (0,30m x 0,30m a 0,50m x 0,50m) com altura típica de pavimento (3 a 4m)",
+        "Obra em zona urbana ou periurbana do Paraná (Curitiba, Londrina, Maringá ou região metropolitana)",
+        "Condições normais de acesso e logística, sem dificuldades extremas",
+        "Preço refere-se ao custo total por m³ de concreto executado, não apenas material"
+      ],
+      "limitacoes": [
+        "Variação significativa conforme altura do pilar, seção transversal e complexidade da armação",
+        "Pilares muito altos ou com seções pequenas tendem a custar mais por m³",
+        "Preço sensível a flutuações de cimento, aço e combustível (diesel para bomba)",
+        "Não incluso fundação, revestimento ou acabamento posterior",
+        "Conhecimento baseado em padrões de 2023-2024; mercado pode ter evoluído",
+        "Diferenças entre cidades do Paraná podem ser significativas (interior vs. capital)"
+      ],
+      "confianca_declarada": "media",
+      "custo_minimo_rs": 969.6,
+      "custo_provavel_rs": 1292.8,
+      "custo_maximo_rs": 1777.6,
+      "origem_preco": "estimado_pelo_modelo_sem_fonte_verificada",
+      "categoria": "Pilar",
+      "uso_tokens": {
+        "tokens_entrada": 534,
+        "tokens_saida": 485,
+        "tokens_total": 1019
+      },
+      "elemento_id": "Pilar - Concreto armado moldado in loco (8 elementos)",
+      "elementos_originais": [
+        "pilar_328168",
+        "pilar_328169",
+        "pilar_328170",
+        "pilar_328171",
+        "pilar_328172",
+        "pilar_328173",
+        "pilar_328174",
+        "pilar_328175"
+      ],
+      "quantidade_elementos_agrupados": 8,
+      "quantidade": 0.808
+    }
+  ],
+  "custo_total_minimo_rs": 18396.2,
+  "custo_total_provavel_rs": 26721.25,
+  "custo_total_maximo_rs": 37163.7,
+  "observacoes_gerais": "Lote com 20 elemento(s) original(is), agrupados em 5 entrada(s) (mesma categoria + mesmo Material_Estrutural + mesma espessura estrutural exata, quando houver -- sem SINAPI, sem bucket aproximado): 5 com faixa de preco estimada (das quais 0 com faixa_inconsistente=true -- revisar); 0 sem unidade/quantidade determinavel e 0 com falha na chamada, no parse ou na validacao de sanidade da resposta da IA -- essas 0 entrada(s) ficaram de fora dos totais.",
+  "quantidade_chamadas_ia": 5,
+  "uso_tokens_total_lote": {
+    "tokens_entrada": 2695,
+    "tokens_saida": 2057,
+    "tokens_total": 4752
+  },
+  "arquivo": "estimativa_mercado_lote_2026-10-26_20-16-22_2026-10-26_20-18-37.json"
+}

@@ -1,0 +1,208 @@
+{
+  "versao_schema": 2,
+  "estimativa_por_elemento": [
+    {
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (4 elementos)",
+      "codigo_sinapi_usado": "103335",
+      "memoria_calculo": "Elemento BIM: Parede de alvenaria de bloco cerâmico (4 elementos agrupados). Correspondência SINAPI: código 103335 descreve alvenaria de vedação de blocos cerâmicos furados 14x9x19 cm, espessura 14 cm, assentamento com argamassa manual. Unidade SINAPI: M2. Quantidade do BIM: 77.11 M2. A correspondência é direta: o quantitativo extraído do modelo BIM já está em M2 (área de parede), compatível com a unidade do preço unitário SINAPI. Não há conversão de unidade necessária. A espessura de 14 cm informada na descrição SINAPI corresponde à espessura estrutural do bloco deitado, que é um padrão construtivo comum e coerente com a classificação 'alvenaria de bloco cerâmico' do modelo. O preço unitário (R$ 186.09/M2) será multiplicado pela quantidade (77.11 M2) para obtenção do custo total.",
+      "suposicoes": [
+        "Assume-se que a quantidade de 77.11 M2 refere-se à área total de parede dos 4 elementos agrupados, já computada pelo sistema de extração BIM.",
+        "Assume-se que os blocos cerâmicos utilizados correspondem ao padrão 14x9x19 cm (bloco deitado, espessura 14 cm) descrito no código SINAPI 103335, conforme é prática comum em vedação.",
+        "Assume-se que a argamassa de assentamento com preparo manual é o método construtivo adotado, compatível com a descrição SINAPI."
+      ],
+      "custo_calculado_rs": 14349.4,
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 1092,
+        "tokens_saida": 482,
+        "tokens_total": 1574
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "103335",
+        "descricao_sinapi": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 14X9X19 CM (ESPESSURA 14 CM, BLOCO DEITADO) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 186.09,
+        "quantidade": 77.11,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "parede_328128",
+        "parede_328129",
+        "parede_328130",
+        "parede_328131"
+      ],
+      "quantidade_elementos_agrupados": 4
+    },
+    {
+      "elemento_id": "Parede - Alvenaria de bloco ceramico (6 elementos)",
+      "codigo_sinapi_usado": "103351",
+      "memoria_calculo": "Elemento BIM: 6 paredes agrupadas de alvenaria de bloco cerâmico, sem especificação de espessura individual no quantitativo. SINAPI 103351 descreve alvenaria de vedação em blocos cerâmicos 9x9x19 cm com espessura 9 cm, assentados na horizontal com argamassa manual. Quantidade recuperada: 53.25 m² (unidade SINAPI: M2). A correspondência é direta: o quantitativo em m² do modelo BIM foi extraído considerando a área total das 6 paredes agrupadas, e o código SINAPI fornece preço por m² de alvenaria executada. Não há conversão de unidade necessária, pois tanto o quantitativo quanto o preço estão em m². A espessura de 9 cm informada no SINAPI é compatível com blocos cerâmicos padrão e não requer ajuste de quantidade.",
+      "suposicoes": [
+        "Assume-se que as 6 paredes agrupadas possuem espessura de 9 cm (padrão para blocos 9x9x19 cm na horizontal), conforme descrito no código SINAPI 103351.",
+        "O quantitativo de 53.25 m² refere-se à área total de vedação das 6 paredes, já computado pelo modelo BIM em unidade compatível com o preço unitário (m²).",
+        "Não há informação de revestimento, pintura ou acabamento no elemento BIM; a correspondência SINAPI refere-se apenas à execução da alvenaria de vedação."
+      ],
+      "custo_calculado_rs": 12095.2,
+      "categoria": "Parede",
+      "uso_tokens": {
+        "tokens_entrada": 1102,
+        "tokens_saida": 451,
+        "tokens_total": 1553
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "103351",
+        "descricao_sinapi": "ALVENARIA DE VEDAÇÃO DE BLOCOS CERÂMICOS FURADOS NA HORIZONTAL DE 9X9X19 CM (ESPESSURA 9 CM) E ARGAMASSA DE ASSENTAMENTO COM PREPARO MANUAL. AF_12/2021",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 227.14,
+        "quantidade": 53.25,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "parede_328132",
+        "parede_328133",
+        "parede_328134",
+        "parede_328135",
+        "parede_328136",
+        "parede_328137"
+      ],
+      "quantidade_elementos_agrupados": 6
+    },
+    {
+      "elemento_id": "Laje - Piso sobre solo (1 elemento)",
+      "codigo_sinapi_usado": "103076",
+      "memoria_calculo": "Elemento classificado como 'Laje' com material estrutural 'Piso sobre solo' foi associado ao código SINAPI 103076, que descreve 'EXECUÇÃO DE LAJE SOBRE SOLO, ESPESSURA DE 10 CM, FCK = 30 MPA, COM USO DE FORMAS EM MADEIRA SERRADA'. A correspondência é direta e apropriada: o código SINAPI especifica execução de laje sobre solo com espessura de 10 cm, que é a tipologia padrão para este tipo de elemento estrutural. A unidade de medida é M2 (metro quadrado), compatível com o quantitativo extraído do modelo BIM (65,2 m2), que representa a área total da laje já líquida de furos, conforme informado nas observações. O preço unitário de R$ 150,49/m2 (referência 07/2026, regime não desonerado) será multiplicado pela quantidade de 65,2 m2 para obtenção do custo total. Não há necessidade de conversão de unidades ou ajustes de espessura, pois o código SINAPI já contempla a espessura de 10 cm como padrão.",
+      "suposicoes": [
+        "Assume-se que a espessura da laje sobre solo é de 10 cm, conforme especificado no código SINAPI 103076. Caso a espessura real do projeto seja diferente, seria necessária busca por código SINAPI alternativo com espessura correspondente.",
+        "A área de 65,2 m2 utilizada como quantidade é uma aproximação baseada na área total do HOST_AREA_COMPUTED do modelo BIM, já líquida de furos. Não representa a área de forma real de fundo, mas é o proxy disponível sem modelagem adicional, conforme informado nas observações do elemento.",
+        "Assume-se que o FCK = 30 MPA e o uso de formas em madeira serrada, conforme especificado no código SINAPI, correspondem às especificações do projeto. Caso haja divergência, seria necessário ajuste do código SINAPI."
+      ],
+      "custo_calculado_rs": 9811.95,
+      "categoria": "Laje",
+      "uso_tokens": {
+        "tokens_entrada": 1100,
+        "tokens_saida": 576,
+        "tokens_total": 1676
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "103076",
+        "descricao_sinapi": "EXECUÇÃO DE LAJE SOBRE SOLO, ESPESSURA DE 10 CM, FCK = 30 MPA, COM USO DE FORMAS EM MADEIRA SERRADA. AF_07/2026",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 150.49,
+        "quantidade": 65.2,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "laje_328140"
+      ],
+      "quantidade_elementos_agrupados": 1
+    },
+    {
+      "elemento_id": "Laje - Laje pre-moldada trelicada (cobertura/forro) (1 elemento)",
+      "codigo_sinapi_usado": "106059",
+      "memoria_calculo": "Correspondência direta entre elemento BIM e código SINAPI: laje pré-moldada trelicada para cobertura/forro com vigota treliçada. O código SINAPI 106059 descreve 'LAJE PRÉ-MOLDADA UNIDIRECIONAL, BIAPOIADA, PARA FORRO, ENCHIMENTO EM CERÂMICA, VIGOTA TRELIÇADA, ALTURA TOTAL DA LAJE LT = 12 CM (ENCHIMENTO+CAPA) = (8+4)'. Unidade: ambos em M2 (compatível). Quantidade do BIM: 65,2 m² (área total da laje via HOST_AREA_COMPUTED, já líquida de furos, conforme observação do modelo). Preço unitário SINAPI: R$ 207,51/m² (referência 07/2026, regime não desonerado, fonte CSD). A altura total de 12 cm (8 cm enchimento + 4 cm capa) é compatível com sistemas pré-moldados trelicados típicos de cobertura/forro. Não há necessidade de conversão de unidade ou ajuste de espessura, pois o preço já é unitário por m² de laje acabada.",
+      "suposicoes": [
+        "Assume-se que a 'Area_Forma_m2' de 65,2 m² informada no quantitativo BIM corresponde à área efetiva de laje a ser orçada, já descontados furos conforme modelagem. Esta é uma aproximação via HOST_AREA_COMPUTED e não representa a área de forma real de fundo, mas é o proxy disponível sem modelagem adicional, conforme explicitado nas observações do elemento.",
+        "Assume-se que o material 'Laje pré-moldada trelicada (cobertura/forro)' do modelo BIM refere-se especificamente a laje unidirecional biapoiada com vigota treliçada e enchimento em cerâmica, conforme descrito no código SINAPI 106059.",
+        "Assume-se que a altura total de 12 cm (8+4) do código SINAPI é compatível com a especificação estrutural do projeto, não havendo necessidade de buscar variantes de espessura diferentes."
+      ],
+      "custo_calculado_rs": 13529.65,
+      "categoria": "Laje",
+      "uso_tokens": {
+        "tokens_entrada": 1147,
+        "tokens_saida": 621,
+        "tokens_total": 1768
+      },
+      "preco_aplicado": {
+        "codigo_sinapi": "106059",
+        "descricao_sinapi": "LAJE PRÉ-MOLDADA UNIDIRECIONAL, BIAPOIADA, PARA FORRO, ENCHIMENTO EM CERÂMICA, VIGOTA TRELIÇADA, ALTURA TOTAL DA LAJE \"LT\" = 12 CM (ENCHIMENTO+CAPA) = (8+4). AF_08/2025",
+        "unidade_sinapi": "M2",
+        "preco_unitario_rs": 207.51,
+        "quantidade": 65.2,
+        "espessura_real_cm": null,
+        "bucket_espessura_cm": null
+      },
+      "elementos_originais": [
+        "laje_328147"
+      ],
+      "quantidade_elementos_agrupados": 1
+    },
+    {
+      "elemento_id": "Pilar - Concreto armado moldado in loco (8 elementos)",
+      "codigos_sinapi_usados": [
+        "92762",
+        "92269",
+        "92413",
+        "103669"
+      ],
+      "memoria_calculo": "Elemento: Grupo de 8 pilares em concreto armado moldado in loco. A resolução decomposta recuperou 4 componentes SINAPI que cobrem as etapas construtivas típicas de pilares convencionais: (1) Armação (código 92762, unidade KG): quantidade 105.04 kg - corresponde ao aço CA-50 de 10mm para armadura dos 8 pilares, apropriado para estrutura convencional. (2) Fabricação de forma (código 92269, unidade M2): quantidade 17.04 m² - refere-se à confecção de fôrma em madeira serrada com espessura 25mm, compatível com pilares retangulares. (3) Montagem e desmontagem de forma (código 92413, unidade M2): quantidade 17.04 m² - mesma área de forma, referente às operações de montagem/desmontagem com 4 utilizações da fôrma, apropriado para pilares retangulares. (4) Concretagem (código 103669, unidade M3): quantidade 0.808 m³ - volume total de concreto FCK=25 MPa para os 8 pilares, com lançamento, adensamento e acabamento. A correspondência é coerente: cada componente representa uma fase distinta da execução de pilares em concreto armado. As quantidades em unidades diferentes (kg, m², m³) refletem a natureza específica de cada serviço e foram extraídas do modelo BIM. Não há conflito de unidades: cada código SINAPI possui sua unidade apropriada e as quantidades do BIM foram já convertidas para essas unidades pelo sistema.",
+      "suposicoes": [
+        "Profundidade do pilar assumida igual à largura (seção quadrada), conforme indicado nas observações do elemento BIM. Esta suposição afeta o cálculo das áreas de forma (m²) e do volume de concreto (m³), mas as quantidades já foram resolvidas pelo sistema BIM.",
+        "Os 8 pilares foram agrupados em um único registro de custo, com quantitativos agregados. A decomposição SINAPI reflete o total dos 8 elementos.",
+        "Aço CA-50 de 10mm foi assumido como padrão para armação de pilares convencionais, conforme descrito no código 92762. Nenhuma informação de diâmetro específico foi fornecida pelo BIM, portanto a correspondência segue o padrão SINAPI.",
+        "Fôrma em madeira serrada com espessura 25mm e 4 utilizações é compatível com a execução típica de pilares convencionais. Nenhuma especificação alternativa (plástica, metálica) foi indicada no BIM.",
+        "Concreto FCK=25 MPa foi assumido como padrão estrutural. Nenhuma especificação de resistência foi fornecida pelo BIM, portanto a correspondência segue o código SINAPI disponível para concretagem de pilares."
+      ],
+      "custo_calculado_rs": 6482.91,
+      "categoria": "Pilar",
+      "uso_tokens": {
+        "tokens_entrada": 1722,
+        "tokens_saida": 834,
+        "tokens_total": 2556
+      },
+      "componentes_detalhados": [
+        {
+          "componente": "armacao",
+          "codigo_sinapi": "92762",
+          "unidade_sinapi": "KG",
+          "preco_unitario_rs": 11.77,
+          "quantidade": 105.03999999999999
+        },
+        {
+          "componente": "forma_fabricacao",
+          "codigo_sinapi": "92269",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 129.79,
+          "quantidade": 17.039999999999996
+        },
+        {
+          "componente": "forma_montagem_desmontagem",
+          "codigo_sinapi": "92413",
+          "unidade_sinapi": "M2",
+          "preco_unitario_rs": 129.71,
+          "quantidade": 17.039999999999996
+        },
+        {
+          "componente": "concretagem",
+          "codigo_sinapi": "103669",
+          "unidade_sinapi": "M3",
+          "preco_unitario_rs": 1020.68,
+          "quantidade": 0.8079999999999999
+        }
+      ],
+      "elementos_originais": [
+        "pilar_328168",
+        "pilar_328169",
+        "pilar_328170",
+        "pilar_328171",
+        "pilar_328172",
+        "pilar_328173",
+        "pilar_328174",
+        "pilar_328175"
+      ],
+      "quantidade_elementos_agrupados": 8
+    }
+  ],
+  "custo_total_calculado_rs": 56269.11,
+  "observacoes_gerais": "Lote com 20 elemento(s) original(is), agrupados em 5 entrada(s) (elementos com retrieval identico -- mesma categoria e mesmo(s) codigo(s) SINAPI -- viram uma unica chamada a IA, com as quantidades somadas, em vez de uma chamada por elemento): 5 com custo calculado; 0 sem preco (retrieval sem correspondencia no mapeamento_sinapi.json ou codigo sem preco em preco_sinapi_pr.json) e 0 com falha na chamada ou no parse da resposta da IA -- essas 0 entrada(s) ficaram de fora de custo_total_calculado_rs.",
+  "mes_referencia_precos": "07/2026",
+  "quantidade_chamadas_ia": 5,
+  "uso_tokens_total_lote": {
+    "tokens_entrada": 6163,
+    "tokens_saida": 2964,
+    "tokens_total": 9127
+  },
+  "arquivo": "estimativa_lote_2026-10-26_20-41-44_2026-10-26_20-43-01.json"
+}

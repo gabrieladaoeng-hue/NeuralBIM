@@ -1,13 +1,12 @@
-# Ambiente virtual Python (reinstalavel com pip install -r requirements.txt)
+# Ambiente virtual Python (reinstalável com pip install -r api/requirements.txt)
 venv/
 .venv/
-**/venv/
 
 # Cache Python
 __pycache__/
 *.pyc
 
-# Credenciais (NUNCA versionar)
+# Credenciais (nunca versionar)
 .env
 *.pem
 .aws/
@@ -16,14 +15,22 @@ credentials
 # Logs
 *.log
 
-# Dados gerados em execucao (lotes recebidos do plugin, estimativas)
+# Dados gerados em execução
 api/dados_recebidos/
 api/static_backup_*/
 validacao_*/backup_antes_dos_testes/
 
-# Arquivos de diagnostico temporarios
-diag*.json
-*_log.json
+# Saídas temporárias de diagnóstico dos botões do plugin (gravadas na raiz)
+/diag*.json
+/*_log.json
+/auditoria_materiais.json
+/referencia_*.json
+
+# Ferramentas e notas locais (fora do repositório)
+/CLAUDE.md
+/print_painel/
+/procurar_python.bat
+/iniciar_api_neuralbim.bat
 
 # Editor / SO
 .vscode/

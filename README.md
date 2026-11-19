@@ -1,4 +1,4 @@
-# NeuralBIM
+# Plugin Revit para quantitativos e orçamento com BIM e IA
 
 Protótipo que integra **BIM (Autodesk Revit)** e **inteligência artificial** para automatizar o levantamento de quantitativos e gerar estimativas preliminares de custo de obra a partir de preços de referência (SINAPI-PR).
 
